@@ -56,10 +56,6 @@ can try running the following from a command prompt/terminal:
 Instructions are also available for `how to obtain and manually install or
 upgrade pip <https://pip.pypa.io/en/latest/installation/>`_.
 
-If you don't already have a supported version of Django installed, using
-``pip`` to install webcolors will also install the latest supported version of
-Django.
-
 
 Installing from a source checkout
 ---------------------------------

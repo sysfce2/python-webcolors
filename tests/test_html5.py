@@ -2,6 +2,9 @@
 Tests for the HTML5 color algorithms.
 
 """
+
+# SPDX-License-Identifier: BSD-3-Clause
+
 import unittest
 
 import webcolors

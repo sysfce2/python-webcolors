@@ -7,21 +7,10 @@ See documentation (in docs/ directory of source distribution) for
 details of the supported formats, conventions and conversions.
 
 """
-from .constants import (
-    CSS2,
-    CSS2_HEX_TO_NAMES,
-    CSS2_NAMES_TO_HEX,
-    CSS3,
-    CSS3_HEX_TO_NAMES,
-    CSS3_NAMES_TO_HEX,
-    CSS21,
-    CSS21_HEX_TO_NAMES,
-    CSS21_NAMES_TO_HEX,
-    HTML4,
-    HTML4_HEX_TO_NAMES,
-    HTML4_NAMES_TO_HEX,
-)
-from .conversion import (
+
+# SPDX-License-Identifier: BSD-3-Clause
+
+from ._conversion import (
     hex_to_name,
     hex_to_rgb,
     hex_to_rgb_percent,
@@ -35,19 +24,33 @@ from .conversion import (
     rgb_to_name,
     rgb_to_rgb_percent,
 )
-from .html5 import (
+from ._definitions import (
+    CSS2,
+    CSS2_HEX_TO_NAMES,
+    CSS2_NAMES_TO_HEX,
+    CSS3,
+    CSS3_HEX_TO_NAMES,
+    CSS3_NAMES_TO_HEX,
+    CSS21,
+    CSS21_HEX_TO_NAMES,
+    CSS21_NAMES_TO_HEX,
+    HTML4,
+    HTML4_HEX_TO_NAMES,
+    HTML4_NAMES_TO_HEX,
+)
+from ._html5 import (
     html5_parse_legacy_color,
     html5_parse_simple_color,
     html5_serialize_simple_color,
 )
-from .normalization import (
+from ._normalization import (
     normalize_hex,
     normalize_integer_triplet,
     normalize_percent_triplet,
 )
-from .types import HTML5SimpleColor, IntegerRGB, IntTuple, PercentRGB, PercentTuple
+from ._types import HTML5SimpleColor, IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
-__version__ = "1.13"
+__version__ = "24.5.0a1"
 
 __all__ = [
     "HTML4",

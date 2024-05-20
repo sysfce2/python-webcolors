@@ -4,6 +4,8 @@ the definitions of the colors from the relevant standards documents.
 
 """
 
+# SPDX-License-Identifier: BSD-3-Clause
+
 import re
 import unittest
 

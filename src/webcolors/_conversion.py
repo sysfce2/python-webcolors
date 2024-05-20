@@ -2,13 +2,23 @@
 Functions which convert between various types of color values.
 
 """
-from . import constants, normalization, types
+
+# SPDX-License-Identifier: BSD-3-Clause
+
+from . import _definitions
+from ._normalization import (
+    _percent_to_integer,
+    normalize_hex,
+    normalize_integer_triplet,
+    normalize_percent_triplet,
+)
+from ._types import IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
 # Conversions from color names to other formats.
 # --------------------------------------------------------------------------------
 
 
-def name_to_hex(name: str, spec: str = constants.CSS3) -> str:
+def name_to_hex(name: str, spec: str = _definitions.CSS3) -> str:
     """
     Convert a color name to a normalized hexadecimal color value.
 
@@ -36,15 +46,15 @@ def name_to_hex(name: str, spec: str = constants.CSS3) -> str:
     :raises ValueError: when the given name has no definition in the given spec.
 
     """
-    if spec not in constants.SUPPORTED_SPECIFICATIONS:
-        raise ValueError(constants.SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
-    hex_value = getattr(constants, f"{spec.upper()}_NAMES_TO_HEX").get(name.lower())
+    if spec not in _definitions.SUPPORTED_SPECIFICATIONS:
+        raise ValueError(_definitions.SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+    hex_value = getattr(_definitions, f"{spec.upper()}_NAMES_TO_HEX").get(name.lower())
     if hex_value is None:
         raise ValueError(f'"{name}" is not defined as a named color in {spec}')
     return hex_value
 
 
-def name_to_rgb(name: str, spec: str = constants.CSS3) -> types.IntegerRGB:
+def name_to_rgb(name: str, spec: str = _definitions.CSS3) -> IntegerRGB:
     """
     Convert a color name to a 3-:class:`tuple` of :class:`int` suitable for use in
     an ``rgb()`` triplet specifying that color.
@@ -72,7 +82,7 @@ def name_to_rgb(name: str, spec: str = constants.CSS3) -> types.IntegerRGB:
     return hex_to_rgb(name_to_hex(name, spec=spec))
 
 
-def name_to_rgb_percent(name: str, spec: str = constants.CSS3) -> types.PercentRGB:
+def name_to_rgb_percent(name: str, spec: str = _definitions.CSS3) -> PercentRGB:
     """
     Convert a color name to a 3-:class:`tuple` of percentages suitable for use
     in an ``rgb()`` triplet specifying that color.
@@ -104,7 +114,7 @@ def name_to_rgb_percent(name: str, spec: str = constants.CSS3) -> types.PercentR
 # --------------------------------------------------------------------------------
 
 
-def hex_to_name(hex_value: str, spec: str = constants.CSS3) -> str:
+def hex_to_name(hex_value: str, spec: str = _definitions.CSS3) -> str:
     """
     Convert a hexadecimal color value to its corresponding normalized
     color name, if any such name exists.
@@ -143,17 +153,17 @@ def hex_to_name(hex_value: str, spec: str = constants.CSS3) -> str:
        spec, or when the supplied hex value is invalid.
 
     """
-    if spec not in constants.SUPPORTED_SPECIFICATIONS:
-        raise ValueError(constants.SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
-    name = getattr(constants, f"{spec.upper()}_HEX_TO_NAMES").get(
-        normalization.normalize_hex(hex_value)
+    if spec not in _definitions.SUPPORTED_SPECIFICATIONS:
+        raise ValueError(_definitions.SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+    name = getattr(_definitions, f"{spec.upper()}_HEX_TO_NAMES").get(
+        normalize_hex(hex_value)
     )
     if name is None:
         raise ValueError(f'"{hex_value}" has no defined color name in {spec}.')
     return name
 
 
-def hex_to_rgb(hex_value: str) -> types.IntegerRGB:
+def hex_to_rgb(hex_value: str) -> IntegerRGB:
     """
     Convert a hexadecimal color value to a 3-:class:`tuple` of :class:`int` suitable
     for use in an ``rgb()`` triplet specifying that color.
@@ -173,11 +183,11 @@ def hex_to_rgb(hex_value: str) -> types.IntegerRGB:
     :raises ValueError: when the supplied hex value is invalid.
 
     """
-    int_value = int(normalization.normalize_hex(hex_value)[1:], 16)
-    return types.IntegerRGB(int_value >> 16, int_value >> 8 & 0xFF, int_value & 0xFF)
+    int_value = int(normalize_hex(hex_value)[1:], 16)
+    return IntegerRGB(int_value >> 16, int_value >> 8 & 0xFF, int_value & 0xFF)
 
 
-def hex_to_rgb_percent(hex_value: str) -> types.PercentRGB:
+def hex_to_rgb_percent(hex_value: str) -> PercentRGB:
     """
     Convert a hexadecimal color value to a 3-:class:`tuple` of percentages
     suitable for use in an ``rgb()`` triplet representing that color.
@@ -204,7 +214,7 @@ def hex_to_rgb_percent(hex_value: str) -> types.PercentRGB:
 # --------------------------------------------------------------------------------
 
 
-def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
+def rgb_to_name(rgb_triplet: IntTuple, spec: str = _definitions.CSS3) -> str:
     """
     Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
@@ -236,12 +246,10 @@ def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
     :raises ValueError: when the given color has no name in the given spec.
 
     """
-    return hex_to_name(
-        rgb_to_hex(normalization.normalize_integer_triplet(rgb_triplet)), spec=spec
-    )
+    return hex_to_name(rgb_to_hex(normalize_integer_triplet(rgb_triplet)), spec=spec)
 
 
-def rgb_to_hex(rgb_triplet: types.IntTuple) -> str:
+def rgb_to_hex(rgb_triplet: IntTuple) -> str:
     """
     Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
     color triplet, to a normalized hexadecimal value for that color.
@@ -258,11 +266,11 @@ def rgb_to_hex(rgb_triplet: types.IntTuple) -> str:
     :param rgb_triplet: The ``rgb()`` triplet.
 
     """
-    red, green, blue = normalization.normalize_integer_triplet(rgb_triplet)
+    red, green, blue = normalize_integer_triplet(rgb_triplet)
     return f"#{red:02x}{green:02x}{blue:02x}"
 
 
-def rgb_to_rgb_percent(rgb_triplet: types.IntTuple) -> types.PercentRGB:
+def rgb_to_rgb_percent(rgb_triplet: IntTuple) -> PercentRGB:
     """
     Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
     color triplet, to a 3-:class:`tuple` of percentages suitable for use in
@@ -302,9 +310,9 @@ def rgb_to_rgb_percent(rgb_triplet: types.IntTuple) -> types.PercentRGB:
         16: "6.25%",
         0: "0%",
     }
-    return types.PercentRGB._make(
+    return PercentRGB._make(
         specials.get(d, f"{d / 255.0 * 100:.02f}%")
-        for d in normalization.normalize_integer_triplet(rgb_triplet)
+        for d in normalize_integer_triplet(rgb_triplet)
     )
 
 
@@ -313,7 +321,7 @@ def rgb_to_rgb_percent(rgb_triplet: types.IntTuple) -> types.PercentRGB:
 
 
 def rgb_percent_to_name(
-    rgb_percent_triplet: types.PercentTuple, spec: str = constants.CSS3
+    rgb_percent_triplet: PercentTuple, spec: str = _definitions.CSS3
 ) -> str:
     """
     Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
@@ -349,14 +357,12 @@ def rgb_percent_to_name(
 
     """
     return rgb_to_name(
-        rgb_percent_to_rgb(
-            normalization.normalize_percent_triplet(rgb_percent_triplet)
-        ),
+        rgb_percent_to_rgb(normalize_percent_triplet(rgb_percent_triplet)),
         spec=spec,
     )
 
 
-def rgb_percent_to_hex(rgb_percent_triplet: types.PercentTuple) -> str:
+def rgb_percent_to_hex(rgb_percent_triplet: PercentTuple) -> str:
     """
     Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
     color triplet, to a normalized hexadecimal color value for that
@@ -377,15 +383,12 @@ def rgb_percent_to_hex(rgb_percent_triplet: types.PercentTuple) -> str:
 
     """
     return rgb_to_hex(
-        rgb_percent_to_rgb(normalization.normalize_percent_triplet(rgb_percent_triplet))
+        rgb_percent_to_rgb(normalize_percent_triplet(rgb_percent_triplet))
     )
 
 
-def rgb_percent_to_rgb(
-    rgb_percent_triplet: types.PercentTuple,
-) -> types.IntegerRGB:
+def rgb_percent_to_rgb(rgb_percent_triplet: PercentTuple) -> IntegerRGB:
     """
-
     Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
     color triplet, to a 3-:class:`tuple` of :class:`int` suitable for use in
     representing that color.
@@ -408,9 +411,9 @@ def rgb_percent_to_rgb(
     :param rgb_percent_triplet: The ``rgb()`` triplet.
 
     """
-    return types.IntegerRGB._make(
+    return IntegerRGB._make(
         map(
-            normalization._percent_to_integer,  # pylint: disable=protected-access
-            normalization.normalize_percent_triplet(rgb_percent_triplet),
+            _percent_to_integer,  # pylint: disable=protected-access
+            normalize_percent_triplet(rgb_percent_triplet),
         )
     )

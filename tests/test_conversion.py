@@ -2,6 +2,9 @@
 Test the color-format conversion utilities.
 
 """
+
+# SPDX-License-Identifier: BSD-3-Clause
+
 import unittest
 
 import webcolors
@@ -49,7 +52,7 @@ class HexConversionTests(unittest.TestCase):
         unsupported specification raises ValueError.
 
         """
-        for supported_spec in webcolors.constants.SUPPORTED_SPECIFICATIONS:
+        for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
             result = webcolors.hex_to_name("#ffffff", spec=supported_spec)
             assert "white" == result
 
@@ -134,7 +137,7 @@ class IntegerRGBConversionTests(unittest.TestCase):
         unsupported specification raises ValueError.
 
         """
-        for supported_spec in webcolors.constants.SUPPORTED_SPECIFICATIONS:
+        for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
             result = webcolors.rgb_to_name((255, 255, 255), spec=supported_spec)
             assert "white" == result
 
@@ -220,7 +223,7 @@ class NameConversionTests(unittest.TestCase):
         unsupported specification raises ValueError.
 
         """
-        for supported_spec in webcolors.constants.SUPPORTED_SPECIFICATIONS:
+        for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
             result = webcolors.name_to_hex("white", spec=supported_spec)
             assert "#ffffff" == result
 

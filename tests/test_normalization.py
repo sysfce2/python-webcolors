@@ -2,6 +2,9 @@
 Test the color-value normalization functions.
 
 """
+
+# SPDX-License-Identifier: BSD-3-Clause
+
 import unittest
 
 import webcolors
@@ -48,7 +51,7 @@ class NormalizationTests(unittest.TestCase):
         test_pairs = ((255, 255), (0, 0), (128, 128), (-20, 0), (270, 255), (-0, 0))
 
         for raw, normalized in test_pairs:
-            assert normalized == webcolors.normalization._normalize_integer_rgb(raw)
+            assert normalized == webcolors._normalization._normalize_integer_rgb(raw)
 
     def test_normalize_integer_triplet(self):
         """
@@ -85,7 +88,7 @@ class NormalizationTests(unittest.TestCase):
         )
 
         for raw, normalized in test_pairs:
-            assert normalized == webcolors.normalization._normalize_percent_rgb(raw)
+            assert normalized == webcolors._normalization._normalize_percent_rgb(raw)
 
     def test_normalize_percent_triplet(self):
         """

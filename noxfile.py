@@ -1,15 +1,16 @@
 """
 Automated testing via nox (https://nox.thea.codes/).
 
-Combined with a working installation of nox (``pip install nox``), this file specifies a
-matrix of tests, linters, and other quality checks which can be run individually or as a
-suite.
+Combined with a working installation of nox (see ``nox`` documentation), this file
+specifies a matrix of tests, linters, and other quality checks which can be run
+individually or as a suite.
 
-To see available tasks, run ``nox --list``. To run all available tasks -- which requires
-functioning installs of all supported Python versions -- run ``nox``. To run a single
-task, use ``nox -s`` with the name of that task.
+To see available tasks, run ``python -m nox --list``. To run all available tasks --
+which requires functioning installs of all supported Python versions -- run ``python -m
+nox``. To run a single task, use ``python -m nox --session`` with the name of that task.
 
 """
+
 import os
 import pathlib
 import shutil
@@ -19,10 +20,6 @@ import nox
 
 nox.options.default_venv_backend = "venv"
 nox.options.keywords = "not release"
-nox.options.reuse_existing_virtualenvs = True
-
-
-nox.options.default_venv_backend = "venv"
 nox.options.reuse_existing_virtualenvs = True
 
 PACKAGE_NAME = "webcolors"
@@ -55,7 +52,7 @@ def clean(paths: typing.Iterable[os.PathLike] = ARTIFACT_PATHS) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.7", "3.8", "3.9", "3.10", "3.11"], tags=["tests"])
+@nox.session(python=["3.8", "3.9", "3.10", "3.11", "3.12"], tags=["tests"])
 def tests_with_coverage(session: nox.Session) -> None:
     """
     Run the package's unit tests, with coverage report.
@@ -66,39 +63,43 @@ def tests_with_coverage(session: nox.Session) -> None:
         f"python{session.python}",
         "-Wonce::DeprecationWarning",
         "-Im",
-        "pytest",
-        "-vv",
-        "--ignore=src",
-        "--cov=webcolors",
-        "--cov-report",
-        "term-missing",
+        "coverage",
+        "run",
+        "--source",
+        PACKAGE_NAME,
+        "-m",
+        "unittest",
+        "discover",
+    )
+    session.run(
+        f"python{session.python}",
+        "-Im",
+        "coverage",
+        "report",
+        "--show-missing",
     )
     clean()
 
 
-@nox.session(python=["3.11"], tags=["tests", "release"])
+@nox.session(python=["3.12"], tags=["tests", "release"])
 def tests_definitions(session: nox.Session) -> None:
     """
     Run the full color definitions test suite (requires an internet connection).
 
     """
     session.install("pytest", "bs4", "html5lib", "requests", ".[tests]")
-    session.run(
-        f"python{session.python}", "-Im", "pytest", "-vv", "tests/definitions.py"
-    )
+    session.run(f"python{session.python}", "-I", "tests/definitions.py")
     clean()
 
 
-@nox.session(python=["3.11"], tags=["tests", "release"])
+@nox.session(python=["3.12"], tags=["tests", "release"])
 def tests_full_colors(session: nox.Session) -> None:
     """
     Run the full color conversion test suite (slow/CPU-intensive).
 
     """
     session.install(".[tests]")
-    session.run(
-        f"python{session.python}", "-Im", "pytest", "-vv", "tests/full_colors.py"
-    )
+    session.run(f"python{session.python}", "-I", "tests/full_colors.py")
     clean()
 
 
@@ -106,7 +107,7 @@ def tests_full_colors(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.11"], tags=["docs"])
+@nox.session(python=["3.12"], tags=["docs"])
 def docs_build(session: nox.Session) -> None:
     """
     Build the package's documentation as HTML.
@@ -115,7 +116,7 @@ def docs_build(session: nox.Session) -> None:
     session.install(".[docs]")
     session.chdir("docs")
     session.run(
-        f"{session.bin}/python{session.python}",
+        f"python{session.python}",
         "-Im",
         "sphinx",
         "-b",
@@ -128,14 +129,17 @@ def docs_build(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["docs"])
+@nox.session(python=["3.12"], tags=["docs"])
 def docs_docstrings(session: nox.Session) -> None:
     """
     Enforce the presence of docstrings on all modules, classes, functions, and
     methods.
 
     """
-    session.install("interrogate")
+    # interrogate implicitly depends on pkg_resources, which is part of setuptools but
+    # as of Python 3.12, the venv module no longer automatically installed setuptools
+    # into newly-created environments. So we install it manually here.
+    session.install("interrogate", "setuptools")
     session.run(f"python{session.python}", "-Im", "interrogate", "--version")
     session.run(
         f"python{session.python}",
@@ -149,7 +153,7 @@ def docs_docstrings(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["docs"])
+@nox.session(python=["3.12"], tags=["docs"])
 def docs_spellcheck(session: nox.Session) -> None:
     """
     Spell-check the package's documentation.
@@ -163,7 +167,7 @@ def docs_spellcheck(session: nox.Session) -> None:
     build_dir = session.create_tmp()
     session.chdir("docs")
     session.run(
-        f"{session.bin}/python{session.python}",
+        f"python{session.python}",
         "-Im",
         "sphinx",
         "-W",  # Promote warnings to errors, so that misspelled words fail the build.
@@ -181,30 +185,6 @@ def docs_spellcheck(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["docs", "tests"])
-def docs_test(session: nox.Session) -> None:
-    """
-    Run the code samples in the documentation with doctest, to ensure they are
-    correct.
-
-    """
-    session.install(".[docs]")
-    build_dir = session.create_tmp()
-    session.chdir("docs")
-    session.run(
-        f"{session.bin}/python{session.python}",
-        "-Im",
-        "sphinx",
-        "-b",
-        "doctest",
-        "-d",
-        f"{build_dir}/doctrees",
-        ".",
-        f"{build_dir}/html",
-    )
-    clean()
-
-
 # Code formatting checks.
 #
 # These checks do *not* reformat code -- that happens in pre-commit hooks -- but will
@@ -212,13 +192,13 @@ def docs_test(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.11"], tags=["formatters"])
+@nox.session(python=["3.12"], tags=["formatters"])
 def format_black(session: nox.Session) -> None:
     """
     Check code formatting with Black.
 
     """
-    session.install("black")
+    session.install("black>=24.0,<25.0")
     session.run(f"python{session.python}", "-Im", "black", "--version")
     session.run(
         f"python{session.python}",
@@ -234,10 +214,10 @@ def format_black(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["formatters"])
+@nox.session(python=["3.12"], tags=["formatters"])
 def format_isort(session: nox.Session) -> None:
     """
-    Check code formating with Black.
+    Check import order with isort.
 
     """
     session.install("isort")
@@ -260,7 +240,7 @@ def format_isort(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.11"], tags=["linters", "security"])
+@nox.session(python=["3.12"], tags=["linters", "security"])
 def lint_bandit(session: nox.Session) -> None:
     """
     Lint code with the Bandit security analyzer.
@@ -281,7 +261,7 @@ def lint_bandit(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["linters"])
+@nox.session(python=["3.12"], tags=["linters"])
 def lint_flake8(session: nox.Session) -> None:
     """
     Lint code with flake8.
@@ -301,17 +281,17 @@ def lint_flake8(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["linters"])
+@nox.session(python=["3.12"], tags=["linters"])
 def lint_pylint(session: nox.Session) -> None:
     """
-    Lint code with Pyling.
+    Lint code with Pylint.
 
     """
     # Pylint requires that all dependencies be importable during the run. This package
     # does not have any direct dependencies, nor does the normal test suite, but the
     # full conformance suite does require a few extra libraries, so they're installed
     # here.
-    session.install("pylint", "bs4", "html5lib", "requests")
+    session.install("httpx", "pylint")
     session.run(f"python{session.python}", "-Im", "pylint", "--version")
     session.run(f"python{session.python}", "-Im", "pylint", "src/", "tests/")
     clean()
@@ -321,7 +301,7 @@ def lint_pylint(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.11"], tags=["packaging"])
+@nox.session(python=["3.12"], tags=["packaging"])
 def package_build(session: nox.Session) -> None:
     """
     Check that the package builds.
@@ -333,7 +313,7 @@ def package_build(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["packaging"])
+@nox.session(python=["3.12"], tags=["packaging"])
 def package_description(session: nox.Session) -> None:
     """
     Check that the package description will render on the Python Package Index.
@@ -357,7 +337,7 @@ def package_description(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["packaging"])
+@nox.session(python=["3.12"], tags=["packaging"])
 def package_manifest(session: nox.Session) -> None:
     """
     Check that the set of files in the package matches the set under version control.
@@ -369,7 +349,7 @@ def package_manifest(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["packaging"])
+@nox.session(python=["3.12"], tags=["packaging"])
 def package_pyroma(session: nox.Session) -> None:
     """
     Check package quality with pyroma.
@@ -380,7 +360,7 @@ def package_pyroma(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["packaging"])
+@nox.session(python=["3.12"], tags=["packaging"])
 def package_wheel(session: nox.Session) -> None:
     """
     Check the built wheel package for common errors.

@@ -2,7 +2,11 @@
 Normalization utilities for color values.
 
 """
-from . import constants, types
+
+# SPDX-License-Identifier: BSD-3-Clause
+
+from ._definitions import HEX_COLOR_RE
+from ._types import IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
 
 def normalize_hex(hex_value: str) -> str:
@@ -41,7 +45,7 @@ def normalize_hex(hex_value: str) -> str:
     :raises ValueError: when the input is not a valid hexadecimal color value.
 
     """
-    match = constants.HEX_COLOR_RE.match(hex_value)
+    match = HEX_COLOR_RE.match(hex_value)
     if match is None:
         raise ValueError(f'"{hex_value}" is not a valid hexadecimal color value.')
     hex_digits = match.group(1)
@@ -59,9 +63,7 @@ def _normalize_integer_rgb(value: int) -> int:
     return 0 if value < 0 else 255 if value > 255 else value
 
 
-def normalize_integer_triplet(
-    rgb_triplet: types.IntTuple,
-) -> types.IntegerRGB:
+def normalize_integer_triplet(rgb_triplet: IntTuple) -> IntegerRGB:
     """
     Normalize an integer ``rgb()`` triplet so that all values are
     within the range 0..255.
@@ -82,9 +84,7 @@ def normalize_integer_triplet(
     :param rgb_triplet: The percentage `rgb()` triplet to normalize.
 
     """
-    return types.IntegerRGB._make(
-        _normalize_integer_rgb(value) for value in rgb_triplet
-    )
+    return IntegerRGB._make(_normalize_integer_rgb(value) for value in rgb_triplet)
 
 
 def _normalize_percent_rgb(value: str) -> str:
@@ -99,9 +99,7 @@ def _normalize_percent_rgb(value: str) -> str:
     return "0%" if percent < 0 else "100%" if percent > 100 else f"{percent}%"
 
 
-def normalize_percent_triplet(
-    rgb_triplet: types.PercentTuple,
-) -> types.PercentRGB:
+def normalize_percent_triplet(rgb_triplet: PercentTuple) -> PercentRGB:
     """
     Normalize a percentage ``rgb()`` triplet so that all values are
     within the range 0%..100%.
@@ -120,9 +118,7 @@ def normalize_percent_triplet(
     :param rgb_triplet: The percentage `rgb()` triplet to normalize.
 
     """
-    return types.PercentRGB._make(
-        _normalize_percent_rgb(value) for value in rgb_triplet
-    )
+    return PercentRGB._make(_normalize_percent_rgb(value) for value in rgb_triplet)
 
 
 def _percent_to_integer(percent: str) -> int:

@@ -14,12 +14,16 @@ the standard are included as comments interspersed in the
 implementation.
 
 """
+
+# SPDX-License-Identifier: BSD-3-Clause
+
 import string
 
-from . import constants, types
+from ._definitions import CSS3_NAMES_TO_HEX
+from ._types import HTML5SimpleColor, IntTuple
 
 
-def html5_parse_simple_color(value: str) -> types.HTML5SimpleColor:
+def html5_parse_simple_color(value: str) -> HTML5SimpleColor:
     """
     Apply the HTML5 simple color parsing algorithm.
 
@@ -78,12 +82,12 @@ def html5_parse_simple_color(value: str) -> types.HTML5SimpleColor:
     #    number and let the result be the blue component of result.
     #
     # 9. Return result.
-    return types.HTML5SimpleColor(
+    return HTML5SimpleColor(
         int(value[1:3], 16), int(value[3:5], 16), int(value[5:7], 16)
     )
 
 
-def html5_serialize_simple_color(simple_color: types.IntTuple) -> str:
+def html5_serialize_simple_color(simple_color: IntTuple) -> str:
     """
     Apply the HTML5 simple color serialization algorithm.
 
@@ -118,11 +122,11 @@ def html5_serialize_simple_color(simple_color: types.IntTuple) -> str:
     return result
 
 
-def html5_parse_legacy_color(value: str) -> types.HTML5SimpleColor:
+def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
     """
     Apply the HTML5 legacy color parsing algorithm.
 
-    Note that, since this algorithm is intended to handle many types of
+    Note that, since this algorithm is intended to handle many _types of
     malformed color values present in real-world Web documents, it is
     *extremely* forgiving of input, but the results of parsing inputs
     with high levels of "junk" (i.e., text other than a color value)
@@ -167,7 +171,7 @@ def html5_parse_legacy_color(value: str) -> types.HTML5SimpleColor:
     #    keywords listed in the SVG color keywords section of the CSS3
     #    Color specification, then return the simple color
     #    corresponding to that keyword.
-    keyword_hex = constants.CSS3_NAMES_TO_HEX.get(value.lower())
+    keyword_hex = CSS3_NAMES_TO_HEX.get(value.lower())
     if keyword_hex is not None:
         return html5_parse_simple_color(keyword_hex)
 
@@ -193,7 +197,7 @@ def html5_parse_legacy_color(value: str) -> types.HTML5SimpleColor:
         # 4. Interpret the fourth character of input as a hexadecimal
         #    digit; let the blue component of result be the resulting
         #    number multiplied by 17.
-        result = types.HTML5SimpleColor(
+        result = HTML5SimpleColor(
             int(value[1], 16) * 17, int(value[2], 16) * 17, int(value[3], 16) * 17
         )
 
@@ -263,4 +267,4 @@ def html5_parse_legacy_color(value: str) -> types.HTML5SimpleColor:
     #     the blue component of result be the resulting number.
     #
     # 20. Return result.
-    return types.HTML5SimpleColor(int(red, 16), int(green, 16), int(blue, 16))
+    return HTML5SimpleColor(int(red, 16), int(green, 16), int(blue, 16))

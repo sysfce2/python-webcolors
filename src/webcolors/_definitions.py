@@ -1,7 +1,10 @@
 """
-Constants representing valid formats and values for colors.
+Definitions of valid formats and values for colors.
 
 """
+
+# SPDX-License-Identifier: BSD-3-Clause
+
 import re
 
 

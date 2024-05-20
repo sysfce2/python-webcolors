@@ -4,7 +4,9 @@ Configuration file for the Sphinx documentation builder:
 https://www.sphinx-doc.org/
 
 """
+
 import sys
+from importlib.metadata import version as get_version
 
 extensions = [
     "notfound.extension",
@@ -20,9 +22,8 @@ templates_path = ["_templates"]
 source_suffix = ".rst"
 master_doc = "index"
 project = "webcolors"
-copyright = "2008, James Bennett"
-version = "1.13"
-release = "1.13"
+copyright = "James Bennett, and contributors"
+version = get_version("webcolors")
 exclude_trees = ["_build"]
 pygments_style = "sphinx"
 htmlhelp_basename = "webcolorsdoc"

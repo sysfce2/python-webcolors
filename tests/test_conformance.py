@@ -10,6 +10,8 @@ connection and an HTML parsing library), see the file
 
 """
 
+# SPDX-License-Identifier: BSD-3-Clause
+
 import unittest
 
 import webcolors
