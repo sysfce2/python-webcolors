@@ -229,7 +229,7 @@ Version 1.3.1
 
 Released October 2009
 
-* Documentatio expanded.
+* Documentation expanded.
 
 * Documentation now maintained using `Sphinx <http://www.sphinx-doc.org/>`_.
 
