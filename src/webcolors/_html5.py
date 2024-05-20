@@ -39,32 +39,29 @@ def html5_parse_simple_color(value: str) -> HTML5SimpleColor:
         ValueError: An HTML5 simple color must be a string seven characters long.
 
     :param value: The color to parse.
-    :type value: :class:`str`, which must consist of exactly
-        the character ``"#"`` followed by six hexadecimal digits
-    :raises ValueError: when the given value is not a Unicode string of
-       length 7, consisting of exactly the character ``#`` followed by
-       six hexadecimal digits.
-
+    :type value: :class:`str`, which must consist of exactly the character ``"#"``
+        followed by six hexadecimal digits
+    :raises ValueError: when the given value is not a Unicode string of length 7,
+       consisting of exactly the character ``#`` followed by six hexadecimal digits.
 
     """
     # 1. Let input be the string being parsed.
     #
-    # 2. If input is not exactly seven characters long, then return an
-    #    error.
+    # 2. If input is not exactly seven characters long, then return an error.
     if not isinstance(value, str) or len(value) != 7:
         raise ValueError(
             "An HTML5 simple color must be a Unicode string seven characters long."
         )
 
-    # 3. If the first character in input is not a U+0023 NUMBER SIGN
-    #    character (#), then return an error.
+    # 3. If the first character in input is not a U+0023 NUMBER SIGN character (#), then
+    #    return an error.
     if not value.startswith("#"):
         raise ValueError(
             "An HTML5 simple color must begin with the character '#' (U+0023)."
         )
 
-    # 4. If the last six characters of input are not all ASCII hex
-    #    digits, then return an error.
+    # 4. If the last six characters of input are not all ASCII hex digits, then return
+    #    an error.
     if not all(c in string.hexdigits for c in value[1:]):
         raise ValueError(
             "An HTML5 simple color must contain exactly six ASCII hex digits."
@@ -72,14 +69,14 @@ def html5_parse_simple_color(value: str) -> HTML5SimpleColor:
 
     # 5. Let result be a simple color.
     #
-    # 6. Interpret the second and third characters as a hexadecimal
-    #    number and let the result be the red component of result.
+    # 6. Interpret the second and third characters as a hexadecimal number and let the
+    #    result be the red component of result.
     #
-    # 7. Interpret the fourth and fifth characters as a hexadecimal
-    #    number and let the result be the green component of result.
+    # 7. Interpret the fourth and fifth characters as a hexadecimal number and let the
+    #    result be the green component of result.
     #
-    # 8. Interpret the sixth and seventh characters as a hexadecimal
-    #    number and let the result be the blue component of result.
+    # 8. Interpret the sixth and seventh characters as a hexadecimal number and let the
+    #    result be the blue component of result.
     #
     # 9. Return result.
     return HTML5SimpleColor(
@@ -105,14 +102,12 @@ def html5_serialize_simple_color(simple_color: IntTuple) -> str:
     """
     red, green, blue = simple_color
 
-    # 1. Let result be a string consisting of a single "#" (U+0023)
-    #    character.
+    # 1. Let result be a string consisting of a single "#" (U+0023) character.
     result = "#"
 
-    # 2. Convert the red, green, and blue components in turn to
-    #    two-digit hexadecimal numbers using lowercase ASCII hex
-    #    digits, zero-padding if necessary, and append these numbers
-    #    to result, in the order red, green, blue.
+    # 2. Convert the red, green, and blue components in turn to two-digit hexadecimal
+    #    numbers using lowercase ASCII hex digits, zero-padding if necessary, and append
+    #    these numbers to result, in the order red, green, blue.
     format_string = "{:02x}"
     result += format_string.format(red)
     result += format_string.format(green)
@@ -159,26 +154,25 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
     if value == "":
         raise ValueError("HTML5 legacy color parsing forbids empty string as a value.")
 
-    # 3. Strip leading and trailing whitespace from input.
+    # 3. Strip leading and trailing ASCII whitespace from input.
     value = value.strip()
 
-    # 4. If input is an ASCII case-insensitive match for the string
-    #    "transparent", then return an error.
+    # 4. If input is an ASCII case-insensitive match for the string "transparent", then
+    #    return an error.
     if value.lower() == "transparent":
         raise ValueError('HTML5 legacy color parsing forbids "transparent" as a value.')
 
-    # 5. If input is an ASCII case-insensitive match for one of the
-    #    keywords listed in the SVG color keywords section of the CSS3
-    #    Color specification, then return the simple color
-    #    corresponding to that keyword.
+    # 5. If input is an ASCII case-insensitive match for one of the named colors, then
+    #    return the simple color corresponding to that keyword.
+    #
+    #    Note: CSS2 System Colors are not recognized.
     keyword_hex = CSS3_NAMES_TO_HEX.get(value.lower())
     if keyword_hex is not None:
         return html5_parse_simple_color(keyword_hex)
 
-    # 6. If input is four characters long, and the first character in
-    #    input is a "#" (U+0023) character, and the last three
-    #    characters of input are all ASCII hex digits, then run these
-    #    substeps:
+    # 6. If input's code point length is four, and the first character in input is
+    #    U+0023 (#), and the last three characters of input are all ASCII hex digits,
+    #    then:
     if (
         len(value) == 4
         and value.startswith("#")
@@ -186,17 +180,14 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
     ):
         # 1. Let result be a simple color.
         #
-        # 2. Interpret the second character of input as a hexadecimal
-        #    digit; let the red component of result be the resulting
-        #    number multiplied by 17.
+        # 2. Interpret the second character of input as a hexadecimal digit; let the red
+        #    component of result be the resulting number multiplied by 17.
         #
-        # 3. Interpret the third character of input as a hexadecimal
-        #    digit; let the green component of result be the resulting
-        #    number multiplied by 17.
+        # 3. Interpret the third character of input as a hexadecimal digit; let the
+        #    green component of result be the resulting number multiplied by 17.
         #
-        # 4. Interpret the fourth character of input as a hexadecimal
-        #    digit; let the blue component of result be the resulting
-        #    number multiplied by 17.
+        # 4. Interpret the fourth character of input as a hexadecimal digit; let the
+        #    blue component of result be the resulting number multiplied by 17.
         result = HTML5SimpleColor(
             int(value[1], 16) * 17, int(value[2], 16) * 17, int(value[3], 16) * 17
         )
@@ -204,67 +195,65 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
         # 5. Return result.
         return result
 
-    # 7. Replace any characters in input that have a Unicode code
-    #    point greater than U+FFFF (i.e. any characters that are not
-    #    in the basic multilingual plane) with the two-character
-    #    string "00".
+    # 7. Replace any code points greater than U+FFFF in input (i.e., any characters that
+    #    are not in the basic multilingual plane) with the two-character string "00".
     value = "".join("00" if ord(c) > 0xFFFF else c for c in value)
 
-    # 8. If input is longer than 128 characters, truncate input,
-    #    leaving only the first 128 characters.
+    # 8. If input's code point length is greater than 128, truncate input, leaving only
+    #    the first 128 characters.
     if len(value) > 128:
         value = value[:128]
 
-    # 9. If the first character in input is a "#" (U+0023) character,
-    #    remove it.
+    # 9. If the first character in input is a U+0023 NUMBER SIGN character (#), remove
+    #    it.
     if value.startswith("#"):
         value = value[1:]
 
-    # 10. Replace any character in input that is not an ASCII hex
-    #     digit with the character "0" (U+0030).
+    # 10. Replace any character in input that is not an ASCII hex digit with the
+    # character U+0030 DIGIT ZERO (0).
     value = "".join(c if c in string.hexdigits else "0" for c in value)
 
-    # 11. While input's length is zero or not a multiple of three,
-    #     append a "0" (U+0030) character to input.
+    # 11. While input's code point length is zero or not a multiple of three, append a
+    #     U+0030 DIGIT ZERO (0) character to input.
     while (len(value) == 0) or (len(value) % 3 != 0):
         value += "0"
 
-    # 12. Split input into three strings of equal length, to obtain
-    #     three components. Let length be the length of those
-    #     components (one third the length of input).
+    # 12. Split input into three strings of equal code point length, to obtain three
+    #     components. Let length be the code point length that all of those components
+    #     have (one third the code point length of input).
     length = int(len(value) / 3)
     red = value[:length]
     green = value[length : length * 2]
     blue = value[length * 2 :]
 
-    # 13. If length is greater than 8, then remove the leading
-    #     length-8 characters in each component, and let length be 8.
+    # 13. If length is greater than 8, then remove the leading length-8 characters in
+    #     each component, and let length be 8.
     if length > 8:
         red, green, blue = (red[length - 8 :], green[length - 8 :], blue[length - 8 :])
         length = 8
 
-    # 14. While length is greater than two and the first character in
-    #     each component is a "0" (U+0030) character, remove that
-    #     character and reduce length by one.
+    # 14. While length is greater than two and the first character in each component is
+    #     a U+0030 DIGIT ZERO (0) character, remove that character and reduce length by
+    #     one.
     while (length > 2) and (red[0] == "0" and green[0] == "0" and blue[0] == "0"):
         red, green, blue = (red[1:], green[1:], blue[1:])
         length -= 1
 
-    # 15. If length is still greater than two, truncate each
-    #     component, leaving only the first two characters in each.
+    # 15. If length is still greater than two, truncate each component, leaving only the
+    #     first two characters in each.
     if length > 2:
         red, green, blue = (red[:2], green[:2], blue[:2])
 
     # 16. Let result be a simple color.
     #
-    # 17. Interpret the first component as a hexadecimal number; let
-    #     the red component of result be the resulting number.
+    # 17. Interpret the first component as a hexadecimal number; let the red component
+    #     of result be the resulting number.
     #
-    # 18. Interpret the second component as a hexadecimal number; let
-    #     the green component of result be the resulting number.
+    # 18. Interpret the second component as a hexadecimal number; let the green
+    #     component of result be the resulting number.
     #
-    # 19. Interpret the third component as a hexadecimal number; let
-    #     the blue component of result be the resulting number.
+    # 19. Interpret the third component as a hexadecimal number; let the blue component
+    #     of result be the resulting number.
     #
     # 20. Return result.
     return HTML5SimpleColor(int(red, 16), int(green, 16), int(blue, 16))
