@@ -93,11 +93,9 @@ superset of the named colors defined in CSS2.1.
 HTML5
 -----
 
-HTML5 exists in two forms: a living document maintained by WHATWG, and a W3C
-Recommendation. The two HTML5 documents, as of this writing, share a common
-definition of color values and parsing, and formalize the parsing and
-serialization of colors according to prior standards and real-world
-implementations in web browsers.
+HTML5 originally existed in two forms: a living document maintained by WHATWG,
+and a W3C Recommendation. The W3C Recommendation has now been "retired" in
+favor of the WHATWG living standard.
 
 HTML5 does not introduce any new methods of specifying colors, but does
 simplify the description of colors and introduce useful terminology.
