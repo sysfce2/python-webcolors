@@ -1,17 +1,15 @@
 """
 HTML5 color algorithms.
 
-Note that these functions are written in a way that may seem strange to
-developers familiar with Python, because they do not use the most
-efficient or idiomatic way of accomplishing their tasks. This is
-because, for compliance, these functions are written as literal
-translations into Python of the algorithms in HTML5:
+Note that these functions are written in a way that may seem strange to developers
+familiar with Python, because they do not use the most efficient or idiomatic way of
+accomplishing their tasks. This is because, for compliance, these functions are written
+as literal translations into Python of the algorithms in HTML5:
 
 https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#colours
 
-For ease of understanding, the relevant steps of the algorithm from
-the standard are included as comments interspersed in the
-implementation.
+For ease of understanding, the relevant steps of the algorithm from the standard are
+included as comments interspersed in the implementation.
 
 """
 
@@ -40,7 +38,7 @@ def html5_parse_simple_color(value: str) -> HTML5SimpleColor:
 
     :param value: The color to parse.
     :type value: :class:`str`, which must consist of exactly the character ``"#"``
-        followed by six hexadecimal digits
+        followed by six hexadecimal digits.
     :raises ValueError: when the given value is not a Unicode string of length 7,
        consisting of exactly the character ``#`` followed by six hexadecimal digits.
 

@@ -1,6 +1,5 @@
 """
-Types and type aliases used to represent colors in various
-formats.
+Types and type aliases used to represent colors in various formats.
 
 """
 
@@ -11,11 +10,9 @@ import typing
 
 class IntegerRGB(typing.NamedTuple):
     """
-    :class:`~typing.NamedTuple` representing an integer RGB
-    triplet.
+    :class:`~typing.NamedTuple` representing an integer RGB triplet.
 
-    Has three fields, each of type :class:`int` and in the range 0-255
-    inclusive:
+    Has three fields, each of type :class:`int` and in the range 0-255 inclusive:
 
     .. attribute:: red
 
@@ -38,11 +35,10 @@ class IntegerRGB(typing.NamedTuple):
 
 class PercentRGB(typing.NamedTuple):
     """
-    :class:`~typing.NamedTuple` representing a percentage RGB
-    triplet.
+    :class:`~typing.NamedTuple` representing a percentage RGB triplet.
 
-    Has three fields, each of type :class:`str` and representing a
-    percentage value in the range 0%-100% inclusive:
+    Has three fields, each of type :class:`str` and representing a percentage value in
+    the range 0%-100% inclusive:
 
     .. attribute:: red
 
@@ -65,11 +61,9 @@ class PercentRGB(typing.NamedTuple):
 
 class HTML5SimpleColor(typing.NamedTuple):
     """
-    :class:`~typing.NamedTuple` representing an HTML5 simple
-    color.
+    :class:`~typing.NamedTuple` representing an HTML5 simple color.
 
-    Has three fields, each of type :class:`int` and in the range 0-255
-    inclusive:
+    Has three fields, each of type :class:`int` and in the range 0-255 inclusive:
 
     .. attribute:: red
 

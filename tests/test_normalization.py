@@ -12,15 +12,14 @@ import webcolors
 
 class NormalizationTests(unittest.TestCase):
     """
-    Test both the publicly-exposed and internal normalization
-    functions.
+    Test both the publicly-exposed and internal normalization functions.
 
     """
 
     def test_normalize_hex(self):
         """
-        Hexadecimal normalization normalizes valid hex color codes to
-        6 digits, lowercase.
+        Hexadecimal normalization normalizes valid hex color codes to 6 digits,
+        lowercase.
 
         """
         test_pairs = (

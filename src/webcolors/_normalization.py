@@ -11,14 +11,13 @@ from ._types import IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
 def normalize_hex(hex_value: str) -> str:
     """
-    Normalize a hexadecimal color value to a string consisting of the
-    character `#` followed by six lowercase hexadecimal digits (what
-    HTML5 terms a "valid lowercase simple color").
+    Normalize a hexadecimal color value to a string consisting of the character `#`
+    followed by six lowercase hexadecimal digits (what HTML5 terms a "valid lowercase
+    simple color").
 
-    If the supplied value cannot be interpreted as a hexadecimal color
-    value, :exc:`ValueError` is raised. See :ref:`the conventions used
-    by this module <conventions>` for information on acceptable formats
-    for hexadecimal values.
+    If the supplied value cannot be interpreted as a hexadecimal color value,
+    :exc:`ValueError` is raised. See :ref:`the conventions used by this module
+    <conventions>` for information on acceptable formats for hexadecimal values.
 
     Examples:
 
@@ -56,8 +55,8 @@ def normalize_hex(hex_value: str) -> str:
 
 def _normalize_integer_rgb(value: int) -> int:
     """
-    Internal normalization function for clipping integer values into
-    the permitted range (0-255, inclusive).
+    Internal normalization function for clipping integer values into the permitted
+    range (0-255, inclusive).
 
     """
     return 0 if value < 0 else 255 if value > 255 else value
@@ -65,8 +64,8 @@ def _normalize_integer_rgb(value: int) -> int:
 
 def normalize_integer_triplet(rgb_triplet: IntTuple) -> IntegerRGB:
     """
-    Normalize an integer ``rgb()`` triplet so that all values are
-    within the range 0..255.
+    Normalize an integer ``rgb()`` triplet so that all values are within the range
+    0..255.
 
     Examples:
 
@@ -89,8 +88,8 @@ def normalize_integer_triplet(rgb_triplet: IntTuple) -> IntegerRGB:
 
 def _normalize_percent_rgb(value: str) -> str:
     """
-    Internal normalization function for clipping percent values into
-    the permitted range (0%-100%, inclusive).
+    Internal normalization function for clipping percent values into the permitted
+    range (0%-100%, inclusive).
 
     """
     value = value.split("%")[0]
@@ -101,8 +100,8 @@ def _normalize_percent_rgb(value: str) -> str:
 
 def normalize_percent_triplet(rgb_triplet: PercentTuple) -> PercentRGB:
     """
-    Normalize a percentage ``rgb()`` triplet so that all values are
-    within the range 0%..100%.
+    Normalize a percentage ``rgb()`` triplet so that all values are within the range
+    0%..100%.
 
     Examples:
 
@@ -123,8 +122,8 @@ def normalize_percent_triplet(rgb_triplet: PercentTuple) -> PercentRGB:
 
 def _percent_to_integer(percent: str) -> int:
     """
-    Internal helper for converting a percentage value to an integer
-    between 0 and 255 inclusive.
+    Internal helper for converting a percentage value to an integer between 0 and
+    255 inclusive.
 
     """
     return int(round(float(percent.split("%")[0]) / 100 * 255))

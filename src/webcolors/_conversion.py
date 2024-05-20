@@ -22,8 +22,7 @@ def name_to_hex(name: str, spec: str = _definitions.CSS3) -> str:
     """
     Convert a color name to a normalized hexadecimal color value.
 
-    The color name will be normalized to lower-case before being looked
-    up.
+    The color name will be normalized to lower-case before being looked up.
 
     Examples:
 
@@ -41,8 +40,8 @@ def name_to_hex(name: str, spec: str = _definitions.CSS3) -> str:
         ValueError: "goldenrod" is not defined as a named color in html4.
 
     :param name: The color name to convert.
-    :param spec: The specification from which to draw the list of color
-       names. Default is :data:`CSS3`.
+    :param spec: The specification from which to draw the list of color names. Default
+       is :data:`CSS3`.
     :raises ValueError: when the given name has no definition in the given spec.
 
     """
@@ -59,8 +58,7 @@ def name_to_rgb(name: str, spec: str = _definitions.CSS3) -> IntegerRGB:
     Convert a color name to a 3-:class:`tuple` of :class:`int` suitable for use in
     an ``rgb()`` triplet specifying that color.
 
-    The color name will be normalized to lower-case before being looked
-    up.
+    The color name will be normalized to lower-case before being looked up.
 
     Examples:
 
@@ -74,8 +72,8 @@ def name_to_rgb(name: str, spec: str = _definitions.CSS3) -> IntegerRGB:
         IntegerRGB(red=218, green=165, blue=32)
 
     :param name: The color name to convert.
-    :param spec: The specification from which to draw the list of color
-       names. Default is :data:`CSS3.`
+    :param spec: The specification from which to draw the list of color names. Default
+       is :data:`CSS3.`
     :raises ValueError: when the given name has no definition in the given spec.
 
     """
@@ -84,11 +82,10 @@ def name_to_rgb(name: str, spec: str = _definitions.CSS3) -> IntegerRGB:
 
 def name_to_rgb_percent(name: str, spec: str = _definitions.CSS3) -> PercentRGB:
     """
-    Convert a color name to a 3-:class:`tuple` of percentages suitable for use
-    in an ``rgb()`` triplet specifying that color.
+    Convert a color name to a 3-:class:`tuple` of percentages suitable for use in an
+    ``rgb()`` triplet specifying that color.
 
-    The color name will be normalized to lower-case before being looked
-    up.
+    The color name will be normalized to lower-case before being looked up.
 
     Examples:
 
@@ -102,8 +99,8 @@ def name_to_rgb_percent(name: str, spec: str = _definitions.CSS3) -> PercentRGB:
         PercentRGB(red='85.49%', green='64.71%', blue='12.5%')
 
     :param name: The color name to convert.
-    :param spec: The specification from which to draw the list of color
-       names. Default is :data:`CSS3`.
+    :param spec: The specification from which to draw the list of color names. Default
+       is :data:`CSS3`.
     :raises ValueError: when the given name has no definition in the given spec.
 
     """
@@ -116,8 +113,8 @@ def name_to_rgb_percent(name: str, spec: str = _definitions.CSS3) -> PercentRGB:
 
 def hex_to_name(hex_value: str, spec: str = _definitions.CSS3) -> str:
     """
-    Convert a hexadecimal color value to its corresponding normalized
-    color name, if any such name exists.
+    Convert a hexadecimal color value to its corresponding normalized color name, if
+    any such name exists.
 
     The hexadecimal value will be normalized before being looked up.
 
@@ -147,10 +144,10 @@ def hex_to_name(hex_value: str, spec: str = _definitions.CSS3) -> str:
         ValueError: "#daa520" has no defined color name in html4.
 
     :param hex_value: The hexadecimal color value to convert.
-    :param spec: The specification from which to draw the list of color
-       names. Default is :data:`CSS3`.
-    :raises ValueError: when the given color has no name in the given
-       spec, or when the supplied hex value is invalid.
+    :param spec: The specification from which to draw the list of color names. Default
+       is :data:`CSS3`.
+    :raises ValueError: when the given color has no name in the given spec, or when the
+       supplied hex value is invalid.
 
     """
     if spec not in _definitions.SUPPORTED_SPECIFICATIONS:
@@ -189,8 +186,8 @@ def hex_to_rgb(hex_value: str) -> IntegerRGB:
 
 def hex_to_rgb_percent(hex_value: str) -> PercentRGB:
     """
-    Convert a hexadecimal color value to a 3-:class:`tuple` of percentages
-    suitable for use in an ``rgb()`` triplet representing that color.
+    Convert a hexadecimal color value to a 3-:class:`tuple` of percentages suitable
+    for use in an ``rgb()`` triplet representing that color.
 
     The hexadecimal value will be normalized before being converted.
 
@@ -217,11 +214,10 @@ def hex_to_rgb_percent(hex_value: str) -> PercentRGB:
 def rgb_to_name(rgb_triplet: IntTuple, spec: str = _definitions.CSS3) -> str:
     """
     Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
-    color triplet, to its corresponding normalized color name, if any
-    such name exists.
+    color triplet, to its corresponding normalized color name, if any such name exists.
 
-    To determine the name, the triplet will be converted to a
-    normalized hexadecimal value.
+    To determine the name, the triplet will be converted to a normalized hexadecimal
+    value.
 
     .. note:: **Spelling variants**
 
@@ -241,8 +237,8 @@ def rgb_to_name(rgb_triplet: IntTuple, spec: str = _definitions.CSS3) -> str:
         'navy'
 
     :param rgb_triplet: The ``rgb()`` triplet.
-    :param spec: The specification from which to draw the list of color
-       names. Default is :data:`CSS3`.
+    :param spec: The specification from which to draw the list of color names. Default
+       is :data:`CSS3`.
     :raises ValueError: when the given color has no name in the given spec.
 
     """
@@ -273,8 +269,8 @@ def rgb_to_hex(rgb_triplet: IntTuple) -> str:
 def rgb_to_rgb_percent(rgb_triplet: IntTuple) -> PercentRGB:
     """
     Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
-    color triplet, to a 3-:class:`tuple` of percentages suitable for use in
-    representing that color.
+    color triplet, to a 3-:class:`tuple` of percentages suitable for use in representing
+    that color.
 
     .. note:: **Floating-point precision**
 
@@ -325,11 +321,10 @@ def rgb_percent_to_name(
 ) -> str:
     """
     Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
-    color triplet, to its corresponding normalized color name, if any
-    such name exists.
+    color triplet, to its corresponding normalized color name, if any such name exists.
 
-    To determine the name, the triplet will be converted to a
-    normalized hexadecimal value.
+    To determine the name, the triplet will be converted to a normalized hexadecimal
+    value.
 
     .. note:: **Spelling variants**
 
@@ -351,8 +346,8 @@ def rgb_percent_to_name(
         'goldenrod'
 
     :param rgb_percent_triplet: The ``rgb()`` triplet.
-    :param spec: The specification from which to draw the list of color
-        names. Default is :data:`CSS3`.
+    :param spec: The specification from which to draw the list of color names. Default
+        is :data:`CSS3`.
     :raises ValueError: when the given color has no name in the given spec.
 
     """
@@ -365,8 +360,7 @@ def rgb_percent_to_name(
 def rgb_percent_to_hex(rgb_percent_triplet: PercentTuple) -> str:
     """
     Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
-    color triplet, to a normalized hexadecimal color value for that
-    color.
+    color triplet, to a normalized hexadecimal color value for that color.
 
     Examples:
 
@@ -393,9 +387,8 @@ def rgb_percent_to_rgb(rgb_percent_triplet: PercentTuple) -> IntegerRGB:
     color triplet, to a 3-:class:`tuple` of :class:`int` suitable for use in
     representing that color.
 
-    Some precision may be lost in this conversion. See the note
-    regarding precision for :func:`~webcolors.rgb_to_rgb_percent` for
-    details.
+    Some precision may be lost in this conversion. See the note regarding precision for
+    :func:`~webcolors.rgb_to_rgb_percent` for details.
 
     Examples:
 

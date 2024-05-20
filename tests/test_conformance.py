@@ -1,12 +1,10 @@
 """
-Conformance tests which do not require an internet connection or HTML
-parsing libraries, and so can be run as part of the normal test suite
-of webcolors.
+Conformance tests which do not require an internet connection or HTML parsing
+libraries, and so can be run as part of the normal test suite of webcolors.
 
-For tests which extract the relevant values, during the test run, from
-the online standards documents (and so require both an internet
-connection and an HTML parsing library), see the file
-``definitions.py`` in this directory.
+For tests which extract the relevant values, during the test run, from the online
+standards documents (and so require both an internet connection and an HTML parsing
+library), see the file ``definitions.py`` in this directory.
 
 """
 
@@ -16,13 +14,11 @@ import unittest
 
 import webcolors
 
-# The mappings of color names to values below are used for conformance
-# testing; while the main webcolors module makes use of alphabetized,
-# normalized mappings to hex values, the mappings below are the
-# definitions in precisely the form they take in the relevant
-# standards documents (they were produced via automated extraction
-# from the HTML of those documents, to avoid the possibility of human
-# copy/paste error).
+# The mappings of color names to values below are used for conformance testing; while
+# the main webcolors module makes use of alphabetized, normalized mappings to hex
+# values, the mappings below are the definitions in precisely the form they take in the
+# relevant standards documents (they were produced via automated extraction from the
+# HTML of those documents, to avoid the possibility of human copy/paste error).
 #
 # Sources are:
 #
@@ -31,8 +27,8 @@ import webcolors
 # SVG colors (which CSS 3 adopted):
 # http://www.w3.org/TR/SVG/types.html#ColorKeywords
 #
-# Conformance of this module with the relevant standards is proven by
-# comparing its output to these mappings.
+# Conformance of this module with the relevant standards is proven by comparing its
+# output to these mappings.
 HTML4_COLOR_DEFINITIONS = {
     "Black": "#000000",
     "Silver": "#C0C0C0",
@@ -205,15 +201,15 @@ SVG_COLOR_DEFINITIONS = {
 
 class ConformanceTests(unittest.TestCase):
     """
-    Demonstrate that this module conforms to the relevant standards
-    documents governing colors on the Web.
+    Demonstrate that this module conforms to the relevant standards documents
+    governing colors on the web.
 
     """
 
     def test_html_definition_conformance(self):
         """
-        Compare the results of name-to-hex conversion to the canonical
-        hex values provided in the HTML 4 specification.
+        Compare the results of name-to-hex conversion to the canonical hex values
+        provided in the HTML 4 specification.
 
         """
         for color, hex_value in HTML4_COLOR_DEFINITIONS.items():
@@ -222,8 +218,8 @@ class ConformanceTests(unittest.TestCase):
 
     def test_svg_definition_conformance(self):
         """
-        Compare the results of name-to-rgb-triplet conversion to the
-        canonical triplet values provided in the SVG specification.
+        Compare the results of name-to-rgb-triplet conversion to the canonical
+        triplet values provided in the SVG specification.
 
         """
         for color, triplet in SVG_COLOR_DEFINITIONS.items():

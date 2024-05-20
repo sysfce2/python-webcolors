@@ -18,8 +18,8 @@ class HTML5Tests(unittest.TestCase):
 
     def test_parse_simple_color(self):
         """
-        Test implementation of the HTML5 simple color parsing
-        algorithm.
+        Test implementation of the HTML5 simple color parsing algorithm.
+
         """
         test_pairs = (
             ("#ffffff", (255, 255, 255)),
@@ -33,8 +33,7 @@ class HTML5Tests(unittest.TestCase):
 
     def test_parse_simple_color_error(self):
         """
-        Test error conditions of the HTML5 simple color parsing
-        algorithm.
+        Test error conditions of the HTML5 simple color parsing algorithm.
 
         """
         test_values = (
@@ -50,8 +49,7 @@ class HTML5Tests(unittest.TestCase):
 
     def test_serialize_simple_color(self):
         """
-        Test implementation of the HTML5 simple color serialization
-        algorithm.
+        Test implementation of the HTML5 simple color serialization algorithm.
 
         """
         test_pairs = (
@@ -67,14 +65,12 @@ class HTML5Tests(unittest.TestCase):
 
     def test_parse_legacy_color(self):
         """
-        Test implementation of the HTML5 legacy color parsing
-        algorithm.
+        Test implementation of the HTML5 legacy color parsing algorithm.
 
         """
-        # One of these is the famous "chucknorris" value. Another is a
-        # CSS 2 system color. The final two are randomly-generated but
-        # believable junk strings. Correct output values obtained
-        # manually.
+        # One of these is the famous "chucknorris" value. Another is a CSS 2 system
+        # color. The final two are randomly-generated but believable junk
+        # strings. Correct output values obtained manually.
         test_pairs = (
             ("chucknorris", (192, 0, 0)),
             ("Window", (0, 13, 0)),
@@ -98,8 +94,8 @@ class HTML5Tests(unittest.TestCase):
 
     def test_parse_legacy_color_hex(self):
         """
-        Test the HTML5 legacy color parsing of three- and six-digit
-        hexadecimal color values.
+        Test the HTML5 legacy color parsing of three- and six-digit hexadecimal
+        color values.
 
         """
         test_values = ("#000", "#000000", "#fff", "#ffffff", "#000080")

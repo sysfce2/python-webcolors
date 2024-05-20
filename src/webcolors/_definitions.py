@@ -10,8 +10,8 @@ import re
 
 def _reversedict(dict_to_reverse: dict) -> dict:
     """
-    Internal helper for generating reverse mappings; given a
-    dictionary, returns a new dictionary with keys and values swapped.
+    Internal helper for generating reverse mappings; given a dictionary, returns a
+    new dictionary with keys and values swapped.
 
     """
     return {value: key for key, value in dict_to_reverse.items()}
@@ -36,14 +36,13 @@ SPECIFICATION_ERROR_TEMPLATE = (
 
 # The HTML 4 named colors.
 #
-# The canonical source for these color definitions is the HTML 4
-# specification:
+# The canonical source for these color definitions is the HTML 4 specification:
 #
 # http://www.w3.org/TR/html401/types.html#h-6.5
 #
-# The file tests/definitions.py in the source distribution of this
-# module downloads a copy of the HTML 4 standard and parses out the
-# color names to ensure the values below are correct.
+# The file tests/definitions.py in the source distribution of this module downloads a
+# copy of the HTML 4 standard and parses out the color names to ensure the values below
+# are correct.
 HTML4_NAMES_TO_HEX = {
     "aqua": "#00ffff",
     "black": "#000000",
@@ -71,9 +70,8 @@ CSS21_NAMES_TO_HEX = {"orange": "#ffa500", **HTML4_NAMES_TO_HEX}
 
 # The CSS3/SVG named colors.
 #
-# The canonical source for these color definitions is the SVG
-# specification's color list (which was adopted as CSS 3's color
-# definition):
+# The canonical source for these color definitions is the SVG specification's color list
+# (which was adopted as CSS 3's color definition):
 #
 # http://www.w3.org/TR/SVG11/types.html#ColorKeywords
 #
@@ -81,13 +79,11 @@ CSS21_NAMES_TO_HEX = {"orange": "#ffa500", **HTML4_NAMES_TO_HEX}
 #
 # http://www.w3.org/TR/css3-color/#svg-color
 #
-# SVG provides the definitions as RGB triplets. CSS3 provides them
-# both as RGB triplets and as hexadecimal. Since hex values are more
-# common in real-world HTML and CSS, the mapping below is to hex
-# values instead. The file tests/definitions.py in the source
-# distribution of this module downloads a copy of the CSS3 color
-# module and parses out the color names to ensure the values below are
-# correct.
+# SVG provides the definitions as RGB triplets. CSS3 provides them both as RGB triplets
+# and as hexadecimal. Since hex values are more common in real-world HTML and CSS, the
+# mapping below is to hex values instead. The file tests/definitions.py in the source
+# distribution of this module downloads a copy of the CSS3 color module and parses out
+# the color names to ensure the values below are correct.
 CSS3_NAMES_TO_HEX = {
     "aliceblue": "#f0f8ff",
     "antiquewhite": "#faebd7",
@@ -250,19 +246,17 @@ CSS21_HEX_TO_NAMES = _reversedict(CSS21_NAMES_TO_HEX)
 
 CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 
-# CSS3 defines both "gray" and "grey", as well as defining either
-# variant for other related colors like "darkgray"/"darkgrey". For a
-# "forward" lookup from name to hex, this is straightforward, but a
-# "reverse" lookup from hex to name requires picking one spelling.
+# CSS3 defines both "gray" and "grey", as well as defining either variant for other
+# related colors like "darkgray"/"darkgrey". For a "forward" lookup from name to hex,
+# this is straightforward, but a "reverse" lookup from hex to name requires picking one
+# spelling.
 #
-# The way in which _reversedict() generates the reverse mappings will
-# pick a spelling based on the ordering of dictionary keys, which
-# varies according to the version and implementation of Python in use,
-# and in some Python versions is explicitly not to be relied on for
-# consistency. So here we manually pick a single spelling that will
-# consistently be returned. Since "gray" was the only spelling
-# supported in HTML 4, CSS1, and CSS2, "gray" and its variants are
-# chosen.
+# The way in which _reversedict() generates the reverse mappings will pick a spelling
+# based on the ordering of dictionary keys, which varies according to the version and
+# implementation of Python in use, and in some Python versions is explicitly not to be
+# relied on for consistency. So here we manually pick a single spelling that will
+# consistently be returned. Since "gray" was the only spelling supported in HTML 4,
+# CSS1, and CSS2, "gray" and its variants are chosen.
 CSS3_HEX_TO_NAMES["#a9a9a9"] = "darkgray"
 CSS3_HEX_TO_NAMES["#2f4f4f"] = "darkslategray"
 CSS3_HEX_TO_NAMES["#696969"] = "dimgray"

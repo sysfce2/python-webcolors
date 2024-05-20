@@ -1,6 +1,6 @@
 """
-Test accuracy of the mappings of color names and values, by extracting
-the definitions of the colors from the relevant standards documents.
+Test accuracy of the mappings of color names and values, by extracting the
+definitions of the colors from the relevant standards documents.
 
 """
 
@@ -18,9 +18,8 @@ import webcolors
 
 class HTML4DefinitionTests(unittest.TestCase):
     """
-    Extract the names and values of the 16 defined HTML 4 colors from
-    the online version of the standard, and check them against this
-    module's definitions of them.
+    Extract the names and values of the 16 defined HTML 4 colors from the online
+    version of the standard, and check them against this module's definitions of them.
 
     """
 
@@ -44,8 +43,7 @@ class HTML4DefinitionTests(unittest.TestCase):
 
     def test_color_definitions(self):
         """
-        Ensure the values in this module match those in the HTML 4
-        specification.
+        Ensure the values in this module match those in the HTML 4 specification.
 
         """
         for color_name, color_value in self.html4_colors.items():
@@ -55,9 +53,8 @@ class HTML4DefinitionTests(unittest.TestCase):
 
 class CSS21DefinitionTests(unittest.TestCase):
     """
-    Extract the names and values of the 17 defined CSS 2.1 colors from
-    the online version of the standard, and check them against this
-    module's definitions of them.
+    Extract the names and values of the 17 defined CSS 2.1 colors from the online
+    version of the standard, and check them against this module's definitions of them.
 
     """
 
@@ -81,8 +78,7 @@ class CSS21DefinitionTests(unittest.TestCase):
 
     def test_color_definitions(self):
         """
-        Ensure thie values in this module match those in the
-        CSS2.1 specification.
+        Ensure thie values in this module match those in the CSS2.1 specification.
 
         """
         for color_name, color_value in self.css21_colors.items():
@@ -92,15 +88,15 @@ class CSS21DefinitionTests(unittest.TestCase):
 
 class CSS3DefinitionTests(unittest.TestCase):
     """
-    Extract the names and values of the 147 defined CSS 3 colors from
-    the online version of the standard, and check them against this
-    module's definitions of them.
+    Extract the names and values of the 147 defined CSS 3 colors from the online
+    version of the standard, and check them against this module's definitions of them.
 
     """
 
     def setUp(self):
         """
         Fetch the CSS3 color definitions and store them on self.css3_colors.
+
         """
         self.css3_colors = {}
         soup = BeautifulSoup(
@@ -133,8 +129,7 @@ class CSS3DefinitionTests(unittest.TestCase):
 
     def test_color_definitions(self):
         """
-        Ensure the values in this module match those in the CSS3
-        specification.
+        Ensure the values in this module match those in the CSS3 specification.
 
         """
         for color_name, color_values in self.css3_colors.items():

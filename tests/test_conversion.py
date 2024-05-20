@@ -13,14 +13,14 @@ import webcolors
 
 class HexConversionTests(unittest.TestCase):
     """
-    Test the functions which convert from hex color codes to other
-    formats.
+    Test the functions which convert from hex color codes to other formats.
 
     """
 
     def test_hex_to_name(self):
         """
         Test conversion from hex to color name.
+
         """
         test_pairs = (
             ("#ffffff", "white"),
@@ -34,9 +34,8 @@ class HexConversionTests(unittest.TestCase):
 
     def test_hex_to_name_unnamed(self):
         """
-        A hex code which does not correspond to a named color, or does
-        not correspond to a named color in the given specification,
-        raises ValueError.
+        A hex code which does not correspond to a named color, or does not
+        correspond to a named color in the given specification, raises ValueError.
 
         """
         # No name in any spec.
@@ -49,8 +48,8 @@ class HexConversionTests(unittest.TestCase):
 
     def test_hex_to_name_specs(self):
         """
-        Using one of the supported specifications succeeds; using an
-        unsupported specification raises ValueError.
+        Using one of the supported specifications succeeds; using an unsupported
+        specification raises ValueError.
 
         """
         for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
@@ -97,8 +96,7 @@ class HexConversionTests(unittest.TestCase):
 
 class IntegerRGBConversionTests(unittest.TestCase):
     """
-    Test the functions which convert from integer RGB triplets to
-    other formats.
+    Test the functions which convert from integer RGB triplets to other formats.
 
     """
 
@@ -119,9 +117,8 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
     def test_rgb_to_name_unnamed(self):
         """
-        An integer RGB triplet which does not correspond to a named
-        color, or does not correspond to a named color in the given
-        specification, raises ValueError.
+        An integer RGB triplet which does not correspond to a named color, or does
+        not correspond to a named color in the given specification, raises ValueError.
 
         """
         # No name in any spec.
@@ -134,8 +131,8 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
     def test_rgb_to_name_specs(self):
         """
-        Using one of the supported specifications succeeds; an
-        unsupported specification raises ValueError.
+        Using one of the supported specifications succeeds; an unsupported
+        specification raises ValueError.
 
         """
         for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
@@ -166,8 +163,7 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
     def test_rgb_to_rgb_percent(self):
         """
-        Test conversion from integer RGB triplet to percent RGB
-        triplet.
+        Test conversion from integer RGB triplet to percent RGB triplet.
 
         """
         test_pairs = (
@@ -184,14 +180,14 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
 class NameConversionTests(unittest.TestCase):
     """
-    Test the functions which convert from color names to other
-    formats.
+    Test the functions which convert from color names to other formats.
 
     """
 
     def test_name_to_hex(self):
         """
         Test correct conversion of color names to hex.
+
         """
         test_pairs = (
             ("white", "#ffffff"),
@@ -204,9 +200,8 @@ class NameConversionTests(unittest.TestCase):
 
     def test_name_to_hex_bad_name(self):
         """
-        A name which does not correspond to a color, or does not
-        correspond to a color in the given specification, raises
-        ValueError.
+        A name which does not correspond to a color, or does not correspond to a
+        color in the given specification, raises ValueError.
 
         """
         test_values = (
@@ -220,8 +215,8 @@ class NameConversionTests(unittest.TestCase):
 
     def test_name_to_hex_specs(self):
         """
-        Using one of the supported specifications succeeds; using an
-        unsupported specification raises ValueError.
+        Using one of the supported specifications succeeds; using an unsupported
+        specification raises ValueError.
 
         """
         for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
@@ -268,8 +263,7 @@ class NameConversionTests(unittest.TestCase):
 
 class PercentRGBConversionTests(unittest.TestCase):
     """
-    Test the functions which convert from percent RGB triplets to
-    other formats.
+    Test the functions which convert from percent RGB triplets to other formats.
 
     """
 
@@ -289,9 +283,8 @@ class PercentRGBConversionTests(unittest.TestCase):
 
     def test_rgb_percent_to_name_unnamed(self):
         """
-        A percent RGB triplet which does not correspond to a named
-        color, or does not correspond to a named color in the given
-        specification, raises ValueError.
+        A percent RGB triplet which does not correspond to a named color, or does
+        not correspond to a named color in the given specification, raises ValueError.
 
         """
         # No name in any spec.
@@ -309,8 +302,8 @@ class PercentRGBConversionTests(unittest.TestCase):
 
     def test_rgb_percent_to_name_specs(self):
         """
-        Using one of the supported specifications succeeds; an
-        unsupported specification raises ValueError.
+        Using one of the supported specifications succeeds; an unsupported
+        specification raises ValueError.
 
         """
         for supported_spec in ("html4", "css2", "css21", "css3"):
@@ -343,8 +336,7 @@ class PercentRGBConversionTests(unittest.TestCase):
 
     def test_rgb_percent_to_rgb(self):
         """
-        Test conversion from percent RGB triplet to integer RGB
-        triplet.
+        Test conversion from percent RGB triplet to integer RGB triplet.
 
         """
         test_pairs = (
@@ -361,16 +353,15 @@ class PercentRGBConversionTests(unittest.TestCase):
 
 class ConversionTests(unittest.TestCase):
     """
-    Test other aspects of convevrsion not covered by format-specific
-    test cases.
+    Test other aspects of conversion not covered by format-specific test cases.
 
     """
 
     def test_spelling_variants(self):
         """
-        When asked to name a color value that maps to either of 'gray' or
-        'grey' in CSS3, or a related color like 'darkgray'/'darkgrey',
-        webcolors always picks 'gray' as the spelling.
+        When asked to name a color value that maps to either of 'gray' or 'grey' in
+        CSS3, or a related color like 'darkgray'/'darkgrey', webcolors always picks
+        'gray' as the spelling.
 
         """
         test_values = (
