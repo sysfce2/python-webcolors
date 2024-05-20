@@ -291,7 +291,7 @@ def lint_pylint(session: nox.Session) -> None:
     # does not have any direct dependencies, nor does the normal test suite, but the
     # full conformance suite does require a few extra libraries, so they're installed
     # here.
-    session.install("httpx", "pylint")
+    session.install("pylint", "bs4", "html5lib", "requests")
     session.run(f"python{session.python}", "-Im", "pylint", "--version")
     session.run(f"python{session.python}", "-Im", "pylint", "src/", "tests/")
     clean()

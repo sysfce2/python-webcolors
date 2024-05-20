@@ -1,10 +1,72 @@
 .. _changelog:
 
 
-Change log
-==========
+Changelog
+=========
 
-This document lists the changes between each release of webcolors.
+This document lists the changes in each release of ``webcolors``.
+
+
+Version numbering
+-----------------
+
+This library currently tracks its version numbers using the ``YY.MM.MICRO``
+form of `Calendar Versioning <https://calver.org>`_ ("CalVer"), in which the
+first two components of the version number are the (two-digit) year and
+(non-zero-padded) month of the release date, while the third component is an
+incrementing value for releases occurring in that month. For example, the first
+release issued in January 2025 would have a version number of 25.1.0; a
+subsequent release in the same month would be 25.1.1; a release the following
+month (February) would be 25.2.0.
+
+The CalVer system was adopted for this library in 2024, and the first release
+to use a CalVer version number was 24.5.0.
+
+
+API stability and deprecations
+------------------------------
+
+The API stability/deprecation policy for this library is as follows:
+
+* The supported stable public API of this library is the set of symbols which
+  are exported by its ``__all__`` declaration and which are documented in this
+  documentation. For classes exported there, the supported stable public API is
+  the set of methods and attributes of those classes whose names do not begin
+  with one or more underscore (``_``) characters and which are documented in
+  this documentation.
+
+* When a public API is to be removed, or undergo a backwards-incompatible
+  change, it will emit a deprecation warning which serves as notice of the
+  intended removal or change, and which will give a date -- which will always
+  be at least in the next calendar year after the first release which emits the
+  deprecation warning -- past which the removal or change may occur without
+  further warning.
+
+* Security fixes, and fixes for high-severity bugs (such as those which might
+  cause unrecoverable crash or data loss), are not required to emit deprecation
+  warnings, and may -- if needed -- impose backwards-incompatible change in any
+  release. If this occurs, this changelog document will contain a note
+  explaining why the usual deprecation process could not be followed for that
+  case.
+
+* This policy is in effect as of the adoption of CalVer versioning, with
+  version 24.5.0 of this library.
+
+
+Releases under CalVer
+---------------------
+
+Version 24.5.0
+~~~~~~~~~~~~~~
+
+*Not yet released*
+
+* Supported Python versions are now 3.8, 3.9, 3.10, and 3.11.
+
+* Running the unit tests no longer uses a third-party test runner; the
+  standard-library ``unittest`` module's runner is used instead.
+
+* Adopted `CalVer versioning <https://calver.org>`_.
 
 
 Version 1.13, released 2023-??-??

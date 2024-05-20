@@ -1,10 +1,13 @@
+Changelog
 amongst
 bugfixes
 bytestrings
-declaratively
+changelog
 chucknorris
 codebase
 colorspace
+deprecations
+declaratively
 gz
 HSL
 identifiably

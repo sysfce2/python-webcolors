@@ -4,6 +4,7 @@ Test the color-format conversion utilities.
 """
 
 # SPDX-License-Identifier: BSD-3-Clause
+# pylint: disable=protected-access
 
 import unittest
 
