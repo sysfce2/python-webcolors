@@ -37,13 +37,13 @@ raise :exc:`ValueError`.
    The public, supported API of webcolors is exported from its top-level
    module, ``webcolors``. Although the codebase is internally organized into
    several submodules for easier maintenance, the existence, names, and
-   organization of these submodules is *not* part of webcolors' public API and
-   cannot be relied upon.
+   organization of these submodules is *not* part of webcolors' supported API
+   and cannot be relied upon.
 
    For example: although :func:`normalize_hex` is actually implemented
-   in a submodule named ``webcolors.normalization``, it must always be
+   in a submodule named ``webcolors._normalization``, it must always be
    referred to as ``webcolors.normalize_hex``, **never** as
-   ``webcolors.normalization.normalize_hex``.
+   ``webcolors._normalization.normalize_hex``.
 
 
 Data types

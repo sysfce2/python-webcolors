@@ -24,6 +24,7 @@ master_doc = "index"
 project = "webcolors"
 copyright = "James Bennett, and contributors"
 version = get_version("webcolors")
+release = version
 exclude_trees = ["_build"]
 pygments_style = "sphinx"
 htmlhelp_basename = "webcolorsdoc"
