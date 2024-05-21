@@ -6,7 +6,7 @@
 Module contents
 ===============
 
-The contents of the webcolors module fall into five categories:
+The contents of the ``webcolors`` module fall into five categories:
 
 1. A set of (optional) data types for representing color values.
 
@@ -21,7 +21,7 @@ The contents of the webcolors module fall into five categories:
 
 See :ref:`the documentation regarding conventions <conventions>` for
 information regarding the types and representation of various color formats in
-webcolors.
+``webcolors``.
 
 All conversion functions which involve color names take an optional argument to
 determine the specification from which to draw color names. See :ref:`the set
@@ -34,15 +34,15 @@ raise :exc:`ValueError`.
 
 .. admonition:: **Imports and submodules**
 
-   The public, supported API of webcolors is exported from its top-level
+   The public, supported API of ``webcolors`` is exported from its top-level
    module, ``webcolors``. Although the codebase is internally organized into
    several submodules for easier maintenance, the existence, names, and
-   organization of these submodules is *not* part of webcolors' supported API
-   and cannot be relied upon.
+   organization of these submodules is *not* part of ``webcolors``' supported
+   API and cannot be relied upon.
 
-   For example: although :func:`normalize_hex` is actually implemented
-   in a submodule named ``webcolors._normalization``, it must always be
-   referred to as ``webcolors.normalize_hex``, **never** as
+   For example: although :func:`normalize_hex` is actually implemented in a
+   submodule named ``webcolors._normalization``, it must always be referred to
+   as ``webcolors.normalize_hex``, **never** as
    ``webcolors._normalization.normalize_hex``.
 
 
@@ -50,10 +50,11 @@ Data types
 ----------
 
 Integer and percentage ``rgb()`` triplets, and HTML5 simple colors, can be
-passed to functions in webcolors as plain 3-:class:`tuple` of the appropriate
-data type. But the following :class:`~typing.NamedTuple` instances are also
-provided to represent these types more richly, and functions in webcolors which
-return triplets or simple colors will return instances of these:
+passed to functions in ``webcolors`` as plain 3-:class:`tuple` of the
+appropriate data type. But the following :class:`~typing.NamedTuple` instances
+are also provided to represent these types more richly, and functions in
+``webcolors`` which return triplets or simple colors will return instances of
+these:
 
 .. autoclass:: IntegerRGB
 .. autoclass:: PercentRGB
@@ -68,8 +69,8 @@ defined, and used throughout this module:
 Constants
 ---------
 
-Several sets of constants are provided in webcolors, for use when converting or
-identifying colors or specifications.
+Several sets of constants are provided in ``webcolors``, for use when
+converting or identifying colors or specifications.
 
 .. _spec-constants:
 
@@ -196,7 +197,7 @@ Conversions from hexadecimal color values to other formats
 .. autofunction:: hex_to_rgb_percent
 
 
-Conversions from integer `rgb()` triplets to other formats
+Conversions from integer ``rgb()`` triplets to other formats
 ------------------------------------------------------------
 
 .. autofunction:: rgb_to_name
@@ -204,7 +205,7 @@ Conversions from integer `rgb()` triplets to other formats
 .. autofunction:: rgb_to_rgb_percent
 
 
-Conversions from percentage `rgb()` triplets to other formats
+Conversions from percentage ``rgb()`` triplets to other formats
 ---------------------------------------------------------------
 
 .. autofunction:: rgb_percent_to_name

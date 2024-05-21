@@ -4,23 +4,22 @@ Frequently asked questions
 ==========================
 
 The following notes answer common questions, and may be useful to you when
-using webcolors.
+using ``webcolors``.
 
 
 What versions of Python are supported?
 --------------------------------------
 
-The webcolors module supports and is tested on Python 3.7, 3.8, 3.9, 3.10, and
-3.11. As of the release of webcolors |release|, these are the only versions of
-Python receiving upstream security support from the Python core team.
+The |release| version of ``webcolors`` supports and is tested on Python 3.8,
+3.9, 3.10, 3.11, and 3.12.
 
 
 How closely does this module follow the standards?
 --------------------------------------------------
 
 As closely as is practical (see below regarding floating-point values), within
-:ref:`the supported formats <support>`; the webcolors module was written with
-the relevant standards documents close at hand. See :ref:`the conformance
+:ref:`the supported formats <support>`; the ``webcolors`` module was written
+with the relevant standards documents close at hand. See :ref:`the conformance
 documentation <conformance>` for details.
 
 
@@ -44,8 +43,8 @@ See :ref:`the conformance documentation <conformance>` for details on how this
 affects testing.
 
 
-Why does webcolors prefer American spellings?
----------------------------------------------
+Why does ``webcolors`` prefer American spellings?
+-------------------------------------------------
 
 In CSS3, several color names are defined multiple times with identical values,
 to support both American and British spelling variants for
@@ -60,13 +59,13 @@ Using any of the conversions from names to other formats
 the `spec` argument is :data:`~webcolors.CSS3`.
 
 However, converting from other formats to a name requires picking one of these
-spellings. Since webcolors uses a Python :class:`dict` to store its
+spellings. Since ``webcolors`` uses a Python :class:`dict` to store its
 :ref:`name-to-value mappings <mapping-constants>`, simply reversing those
 mappings risks inconsistency: swapping the keys and values of a :class:`dict`
 in Python depends on the key order, which varies from one version of Python to
 another and in several supported Python versions is not guaranteed to be
 consistent and/or is documented as an implementation detail not to be relied
-on. So webcolors must manually pick a spelling to normalize to, and chooses
+on. So ``webcolors`` must manually pick a spelling to normalize to, and chooses
 `gray`. This choice was made for consistency with HTML 4, CSS1, and CSS2, each
 of which only allowed `gray`.
 
@@ -94,14 +93,13 @@ CSS3, the ``hsla()`` construct is the only other color format that carries
 alpha-channel information, and as explained above, HSL colors are not supported
 in this module.
 
-The in-progress W3C CSS Colors Level 4 module does provide an 8-digit
-hexadecimal color representation where the final two digits carry alpha-channel
-information. If and when that module becomes a W3C Recommendation with broad
-support in web client software, support for alpha-channel constructs in this
-module may be re-evaluated, though it would still be limited to converting
-between only those constructs which carry alpha-channel information (for
-example, an ``rgba()`` or an eight-digit hexadecimal color value could not be
-losslessly round-tripped to a color name and back).
+The W3C CSS Colors Level 4 module does provide an 8-digit hexadecimal color
+representation where the final two digits carry alpha-channel
+information. Support for its alpha-channel constructs in this module may
+eventually be re-evaluated, though it would likely still be limited to
+converting between only those constructs which carry alpha-channel information
+(for example, an ``rgba()`` or an eight-digit hexadecimal color value could not
+be losslessly round-tripped to a color name and back).
 
 
 Why not use a more object-oriented design with classes for the colors?
@@ -121,17 +119,17 @@ converting amongst color spaces.
 Note that if an object-oriented interface is desired, `the third-party
 colormath module <https://pypi.org/project/colormath/>`_ does have a
 class-based interface (and rightly so, as it offers a wider range of color
-representation and manipulation options than webcolors).
+representation and manipulation options than ``webcolors``).
 
 
 How am I allowed to use this module?
 ------------------------------------
 
-The webcolors module is distributed under a `three-clause BSD license
+The ``webcolors`` module is distributed under a `three-clause BSD license
 <http://opensource.org/licenses/BSD-3-Clause>`_. This is an open-source license
 which grants you broad freedom to use, redistribute, modify and distribute
-modified versions of webcolors. For details, see the file ``LICENSE`` in the
-source distribution of webcolors.
+modified versions of ``webcolors``. For details, see the file ``LICENSE`` in
+the source distribution of ``webcolors``.
 
 .. _three-clause BSD license: http://opensource.org/licenses/BSD-3-Clause
 
@@ -139,6 +137,6 @@ source distribution of webcolors.
 I found a bug or want to make an improvement!
 ---------------------------------------------
 
-The canonical development repository for webcolors is online at
+The canonical development repository for ``webcolors`` is online at
 <https://github.com/ubernostrum/webcolors>. Issues and pull requests can both
 be filed there.

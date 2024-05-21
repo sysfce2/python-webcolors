@@ -4,12 +4,13 @@
 Conformance and testing
 =======================
 
-Much of the behavior of webcolors is dictated by the relevant web standards,
-which define the acceptable color formats, how to determine valid values for
-each format and the values corresponding to defined color names. Maintaining
-correct conversions and conformance to those standards is crucial.
+Much of the behavior of ``webcolors`` is dictated by the relevant web
+standards, which define the acceptable color formats, how to determine valid
+values for each format and the values corresponding to defined color
+names. Maintaining correct conversions and conformance to those standards is
+crucial.
 
-The source distribution of webcolors (the ``.tar.gz`` file you can download
+The source distribution of ``webcolors`` (the ``.tar.gz`` file you can download
 from the Python Package Index) includes a ``tests/`` directory containing a
 normal test suite as well as supplemental test files which perform more
 comprehensive verification.
@@ -18,8 +19,8 @@ comprehensive verification.
 The normal test suite
 ---------------------
 
-The normal test suite for webcolors aims for 100% coverage of code paths, but
-does *not* aim for 100% coverage of possible color value inputs and
+The normal test suite for ``webcolors`` aims for 100% coverage of code paths,
+but does *not* aim for 100% coverage of possible color value inputs and
 outputs. Instead, it uses a small number of test values to routinely exercise
 various functions.
 
@@ -51,9 +52,9 @@ the results of test runs online `at GitHub
 <https://github.com/ubernostrum/webcolors/actions/workflows/ci.yml/>`_.
 
 However, the normal test suite cannot guarantee that the color definitions
-included in webcolors correspond to those in the relevant standards, and cannot
-provide guarantees of correct conversions for all possible values. For that,
-additional tests are required.
+included in ``webcolors`` correspond to those in the relevant standards, and
+cannot provide guarantees of correct conversions for all possible values. For
+that, additional tests are required.
 
 
 .. _full-verification:
@@ -64,16 +65,16 @@ Full verification tests
 These tests are contained in two files which are not executed during normal
 test runs: ``tests/definitions.py`` and ``tests/full_colors.py``. They are not
 run as part of the normal test suite, but are run prior to each release of
-webcolors.
+``webcolors``.
 
 
 Verifying color definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``definitions.py`` test file verifies that the color definitions in
-webcolors are correct. It does this by downloading the relevant standards
+``webcolors`` are correct. It does this by downloading the relevant standards
 documents as HTML, parsing out the color definitions in them, and comparing
-them to the definitions in webcolors. That consists of:
+them to the definitions in ``webcolors``. That consists of:
 
 * Parsing out the names and hexadecimal values of the 16 named colors in the
   HTML 4 standard, and checking that the names and values in
@@ -102,7 +103,7 @@ For conversions between hexadecimal and integer ``rgb()``, it generates all
 16,777,216 possible color values for each format in order (starting at
 ``#000000`` and ``(0,0,0)`` and incrementing), and verifies that each one
 converts to the corresponding value in the other format. Thus, it is possible
-to be confident that webcolors provides correct conversions between all
+to be confident that ``webcolors`` provides correct conversions between all
 possible color values in those formats.
 
 Testing the correctness of conversion to and from percentage ``rgb()``,
@@ -124,7 +125,7 @@ however, is more difficult, and a full test is not provided, for two reasons:
    uncountably infinite, testing all legal values is not possible on current
    hardware in any reasonable amount of time.
 
-Since precise correctness and completeness are not achievable, webcolors
+Since precise correctness and completeness are not achievable, ``webcolors``
 instead aims to achieve *consistency* in conversions. Specifically, the
 ``full_colors.py`` test generates all 16,777,216 integer ``rgb()`` triplets,
 and for each such triplet `t` verifies that the following assertion holds:
@@ -137,11 +138,11 @@ and for each such triplet `t` verifies that the following assertion holds:
 Running the tests
 -----------------
 
-The standard test runner for webcolors is `nox <https://nox.thea.codes/>`_,
+The standard test runner for ``webcolors`` is `nox <https://nox.thea.codes/>`_,
 which supports testing against multiple Python versions and executing a variety
-of different test tasks. The source distribution of webcolors includes its
+of different test tasks. The source distribution of ``webcolors`` includes its
 ``noxfile.py`` file. To run the tests, install nox (``pip install nox``), then
-download and unpack a git checkout or source package of webcolors.
+download and unpack a git checkout or source package of ``webcolors``.
 
 To run the normal test suite against the complete set of supported Python
 versions:
@@ -160,8 +161,8 @@ versions:
       py -m pip install nox
       py -m nox
 
-This requires that you have each supported version of Python (for webcolors
-|release|, this is 3.7, 3.8, 3.9, 3.10, and 3.11) available. To test only
+This requires that you have each supported version of Python (for ``webcolors``
+|release|, this is 3.8, 3.9, 3.10, 3.11, and 3.12) available. To test only
 against a specific version of Python, use the ``--python`` flag and pass the
 version to test. For example, to test on Python 3.10:
 
@@ -178,8 +179,8 @@ version to test. For example, to test on Python 3.10:
       py -m nox --python "3.10"
 
 To run the full verification tests for definition correctness and conversions,
-specify the "release" test keyword instead (so named because these tests
-are usually run only prior to a new release of webcolors):
+specify the "release" test keyword instead (so named because these tests are
+usually run only prior to a new release of ``webcolors``):
 
 .. tab:: macOS/Linux/other Unix
 

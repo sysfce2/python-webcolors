@@ -139,9 +139,9 @@ Version 1.9.1
 
 Released June 2019
 
-* The ``__version__`` attribute of the installed webcolors module, although not
-  documented or referenced anywhere, was accidentally not updated in the 1.9
-  release. It has now been updated (and now indicates 1.9.1).
+* The ``__version__`` attribute of the installed ``webcolors`` module, although
+  not documented or referenced anywhere, was accidentally not updated in the
+  1.9 release. It has now been updated (and now indicates 1.9.1).
 
 
 Version 1.9
@@ -154,7 +154,7 @@ Released June 2019
 
 * When asked to provide a color name, using the CSS3/SVG set of names, for the
   hexadecimal value ``#808080``, the integer triplet ``rgb(128, 128, 128)``, or
-  the percentage triplet ``rgb(50%, 50%, 50%)``, webcolors now always returns
+  the percentage triplet ``rgb(50%, 50%, 50%)``, ``webcolors`` now always returns
   ``u'gray'``, never ``u'grey'``. Previously, the behavior could be
   inconsistent as it depended on the Python version in use; ``u'gray'`` was
   picked because it was the spelling variant used in HTML 4, CSS1, and CSS2.
@@ -215,7 +215,7 @@ Version 1.5
 
 Released March 2015
 
-* Python 3 support: webcolors now supports Python 3.3.
+* Python 3 support: ``webcolors`` now supports Python 3.3.
 
 * Added :ref:`HTML5 color algorithms <html5-algorithms>`.
 
