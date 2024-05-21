@@ -66,6 +66,13 @@ Version 24.5.0
 * Running the unit tests no longer uses a third-party test runner; the
   standard-library ``unittest`` module's runner is used instead.
 
+* Documentation of the HTML5 color algorithms has been updated to emphasize
+  which HTML5 spec is used (the WHATWG spec, which is now the only canonical
+  and maintained HTML5 spec) and comments in the implementations have been
+  updated to include the latest prose description of the HTML5 algorithms from
+  the spec. These updates do not change the behavior of the HTML5 algorithms,
+  and are only for clarity of documentation and explanation.
+
 * Adopted `CalVer versioning <https://calver.org>`_.
 
 
