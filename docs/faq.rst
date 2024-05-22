@@ -58,16 +58,10 @@ Using any of the conversions from names to other formats
 :func:`~webcolors.name_to_rgb_percent`) will accept either spelling provided
 the `spec` argument is :data:`~webcolors.CSS3`.
 
-However, converting from other formats to a name requires picking one of these
-spellings. Since ``webcolors`` uses a Python :class:`dict` to store its
-:ref:`name-to-value mappings <mapping-constants>`, simply reversing those
-mappings risks inconsistency: swapping the keys and values of a :class:`dict`
-in Python depends on the key order, which varies from one version of Python to
-another and in several supported Python versions is not guaranteed to be
-consistent and/or is documented as an implementation detail not to be relied
-on. So ``webcolors`` must manually pick a spelling to normalize to, and chooses
-`gray`. This choice was made for consistency with HTML 4, CSS1, and CSS2, each
-of which only allowed `gray`.
+However, converting from other formats to a name requires choosing which
+spelling to return, and should return the same choice each time. So
+``webcolors`` chooses the ``gray`` variants, for consistency with HTML 4, CSS1,
+and CSS2, each of which only allowed `gray`.
 
 
 Why aren't HSL values supported?
