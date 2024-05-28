@@ -3,8 +3,8 @@
 .. _contents:
 
 
-Module contents
-===============
+API reference
+=============
 
 The contents of the ``webcolors`` module fall into five categories:
 

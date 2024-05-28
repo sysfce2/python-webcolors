@@ -1,9 +1,8 @@
 webcolors |release|
 ===================
 
-This module provides utility functions for working with the color names and
-color value formats defined by the HTML and CSS specifications for use in
-documents on the web.
+``webcolors`` is a module for working with and converting between the various
+HTML/CSS color formats.
 
 Support is included for normalizing and converting between the following
 formats (RGB colorspace only; conversion to/from HSL can be handled by the
@@ -19,7 +18,9 @@ formats (RGB colorspace only; conversion to/from HSL can be handled by the
 
 * Percentage ``rgb()`` triplet
 
-For example::
+For example:
+
+.. code-block:: python
 
     >>> import webcolors
     >>> webcolors.hex_to_name("#daa520")
@@ -27,7 +28,9 @@ For example::
 
 Implementations are also provided for the HTML5 color parsing and serialization
 algorithms. For example, parsing the infamous "chucknorris" string into an
-``rgb()`` triplet::
+``rgb()`` triplet:
+
+.. code-block:: python
 
     >>> import webcolors
     >>> webcolors.html5_parse_legacy_color("chucknorris")
@@ -38,13 +41,24 @@ Documentation contents
 ----------------------
 
 .. toctree::
+   :caption: Getting started
    :maxdepth: 1
 
    install
+
+.. toctree::
+   :caption: Reference
+   :maxdepth: 1
+
    colors
    conventions
    contents
    conformance
+
+.. toctree::
+   :caption: Other documentation
+   :maxdepth: 1
+
    changelog
    faq
 
@@ -55,4 +69,4 @@ Documentation contents
   * `CSS1: Color units <http://www.w3.org/TR/CSS1/#color-units>`_
   * `CSS2: Colors <http://www.w3.org/TR/CSS2/syndata.html#color-units>`_
   * `CSS3 color module <http://www.w3.org/TR/css3-color/>`_
-  * `HTML5: Colors <http://www.w3.org/TR/html5/infrastructure.html#colors>`_
+  * `HTML5: Colors <https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#colours>`_
