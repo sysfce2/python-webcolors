@@ -5,6 +5,7 @@ definitions of the colors from the relevant standards documents.
 """
 
 # SPDX-License-Identifier: BSD-3-Clause
+# pylint: disable=protected-access
 
 import re
 import unittest
@@ -47,7 +48,7 @@ class HTML4DefinitionTests(unittest.TestCase):
 
         """
         for color_name, color_value in self.html4_colors.items():
-            extracted = webcolors.HTML4_NAMES_TO_HEX[color_name.lower()]
+            extracted = webcolors._definitions.HTML4_NAMES_TO_HEX[color_name.lower()]
             assert color_value.lower() == extracted
 
 
@@ -82,7 +83,7 @@ class CSS21DefinitionTests(unittest.TestCase):
 
         """
         for color_name, color_value in self.css21_colors.items():
-            extracted = webcolors.CSS21_NAMES_TO_HEX[color_name.lower()]
+            extracted = webcolors._definitions.CSS21_NAMES_TO_HEX[color_name.lower()]
             assert color_value.lower() == extracted
 
 
@@ -133,7 +134,7 @@ class CSS3DefinitionTests(unittest.TestCase):
 
         """
         for color_name, color_values in self.css3_colors.items():
-            extracted_hex = webcolors.CSS3_NAMES_TO_HEX[color_name.lower()]
+            extracted_hex = webcolors._definitions.CSS3_NAMES_TO_HEX[color_name.lower()]
             extracted_rgb = webcolors.name_to_rgb(color_name)
             assert color_values["hex"].lower() == extracted_hex
             assert color_values["rgb"] == extracted_rgb

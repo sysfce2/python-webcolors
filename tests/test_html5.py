@@ -3,7 +3,8 @@ Tests for the HTML5 color algorithms.
 
 """
 
-# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-License-Identifier: BSD-3-Claus
+# pylint: disable=protected-access
 
 import unittest
 
