@@ -20,7 +20,7 @@ subsequent release in the same month would be 25.1.1; a release the following
 month (February) would be 25.2.0.
 
 The CalVer system was adopted for this library in 2024, and the first release
-to use a CalVer version number was 24.5.0.
+to use a CalVer version number was 24.6.0.
 
 
 API stability and deprecations
@@ -50,13 +50,13 @@ The API stability/deprecation policy for this library is as follows:
   case.
 
 * This policy is in effect as of the adoption of CalVer versioning, with
-  version 24.5.0 of this library.
+  version 24.6.0 of this library.
 
 
 Releases under CalVer
 ---------------------
 
-Version 24.5.0
+Version 24.6.0
 ~~~~~~~~~~~~~~
 
 *Not yet released*
@@ -74,6 +74,10 @@ Version 24.5.0
   and are only for clarity of documentation and explanation.
 
 * Adopted `CalVer versioning <https://calver.org>`_.
+
+* The raw mappings of color names/values are no longer publicly exposed; use
+  the appropriate normalizing conversion functions instead of accessing the
+  mappings directly.
 
 
 Releases not under CalVer

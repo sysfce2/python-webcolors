@@ -66,16 +66,11 @@ defined, and used throughout this module:
 .. autodata:: IntTuple
 .. autodata:: PercentTuple
 
-Constants
----------
-
-Several sets of constants are provided in ``webcolors``, for use when
-converting or identifying colors or specifications.
 
 .. _spec-constants:
 
-Specification identifiers
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Constants
+---------
 
 The following constants are available for indicating the specification from
 which to draw color name choices, in functions which can work with multiple
@@ -96,81 +91,6 @@ specifications.
 .. data:: HTML4
 
    Represents the HTML 4 specification. Value is ``"html4"``.
-
-
-.. _mapping-constants:
-
-Color mappings
-~~~~~~~~~~~~~~
-
-The following constants are available for direct use in mapping from color
-names to values, although it is strongly recommended to use one of the
-normalizing conversion functions instead.
-
-
-Mappings from names to hexadecimal values
-+++++++++++++++++++++++++++++++++++++++++
-
-.. data:: HTML4_NAMES_TO_HEX
-
-   A :class:`dict` whose keys are the normalized names of the sixteen named
-   HTML 4 colors, and whose values are the normalized hexadecimal values of
-   those colors.
-
-.. data:: CSS2_NAMES_TO_HEX
-
-   An alias for :data:`~webcolors.HTML4_NAMES_TO_HEX`, as CSS2 defined the same
-   set of colors.
-
-.. data:: CSS21_NAMES_TO_HEX
-
-   A :class:`dict` whose keys are the normalized names of the seventeen named
-   CSS2.1 colors, and whose values are the normalized hexadecimal values of
-   those colors (sixteen of these are identical to HTML 4 and CSS2; the
-   seventeenth color is ``"orange"``, added in CSS2.1).
-
-.. data:: CSS3_NAMES_TO_HEX
-
-   A :class:`dict` whose keys are the normalized names of the 147 named CSS3
-   colors, and whose values are the normalized hexadecimal values of those
-   colors. These colors are also identical to the 147 named colors of SVG.
-
-
-Mappings from hexadecimal values to names
-+++++++++++++++++++++++++++++++++++++++++
-
-.. data:: HTML4_HEX_TO_NAMES
-
-   A :class:`dict` whose keys are the normalized hexadecimal values of the
-   sixteen named HTML 4 colors, and whose values are the corresponding
-   normalized names.
-
-.. data:: CSS2_HEX_TO_NAMES
-
-   An alias for :data:`~webcolors.HTML4_HEX_TO_NAMES`, as CSS2 defined the same
-   set of colors.
-
-.. data:: CSS21_HEX_TO_NAMES
-
-   A :class:`dict` whose keys are the normalized hexadecimal values of the
-   seventeen named CSS2.1 colors, and whose values are the corresponding
-   normalized names (sixteen of these are identical to HTML 4 and CSS2; the
-   seventeenth color is ``"orange"``, added in CSS2.1).
-
-.. data:: CSS3_HEX_TO_NAMES
-
-   A :class:`dict` whose keys are the normalized hexadecimal values of the 147
-   named CSS3 colors, and whose values are the corresponding normalized
-   names. These colors are also identical to the 147 named colors of SVG.
-
-   .. note:: **Spelling variants**
-
-      Some values representing named gray colors can map to either of two names
-      in CSS3, because it supports both ``"gray"`` and ``"grey"`` spelling
-      variants for those colors. This mapping will always return the variant
-      spelled ``"gray"`` (such as ``"lightgray"`` instead of
-      ``"lightgrey"``). See :ref:`the documentation on name conventions
-      <color-name-conventions>` for details.
 
 
 Normalization functions

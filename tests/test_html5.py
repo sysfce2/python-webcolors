@@ -88,7 +88,7 @@ class HTML5Tests(unittest.TestCase):
         Test the HTML5 legacy color parsing of SVG/CSS3 color names.
 
         """
-        for name in webcolors.CSS3_NAMES_TO_HEX:
+        for name in webcolors._definitions.CSS3_NAMES_TO_HEX:
             parsed = webcolors.html5_parse_legacy_color(name)
             assert parsed == webcolors.name_to_rgb(name)
 

@@ -1,10 +1,9 @@
 """
-Utility functions for working with the color names and color value
-formats defined by the HTML and CSS specifications for use in
-documents on the web.
+Functions for working with the color names and color value formats defined by the
+HTML and CSS specifications for use in documents on the web.
 
-See documentation (in docs/ directory of source distribution) for
-details of the supported formats, conventions and conversions.
+See documentation (in docs/ directory of source distribution) for details of the
+supported formats, conventions and conversions.
 
 """
 
@@ -24,20 +23,7 @@ from ._conversion import (
     rgb_to_name,
     rgb_to_rgb_percent,
 )
-from ._definitions import (
-    CSS2,
-    CSS2_HEX_TO_NAMES,
-    CSS2_NAMES_TO_HEX,
-    CSS3,
-    CSS3_HEX_TO_NAMES,
-    CSS3_NAMES_TO_HEX,
-    CSS21,
-    CSS21_HEX_TO_NAMES,
-    CSS21_NAMES_TO_HEX,
-    HTML4,
-    HTML4_HEX_TO_NAMES,
-    HTML4_NAMES_TO_HEX,
-)
+from ._definitions import CSS2, CSS3, CSS21, HTML4
 from ._html5 import (
     html5_parse_legacy_color,
     html5_parse_simple_color,
@@ -50,21 +36,13 @@ from ._normalization import (
 )
 from ._types import HTML5SimpleColor, IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
-__version__ = "24.5.0a1"
+__version__ = "24.6.0a1"
 
 __all__ = [
     "HTML4",
     "CSS2",
     "CSS21",
     "CSS3",
-    "HTML4_NAMES_TO_HEX",
-    "HTML4_HEX_TO_NAMES",
-    "CSS2_NAMES_TO_HEX",
-    "CSS2_HEX_TO_NAMES",
-    "CSS21_HEX_TO_NAMES",
-    "CSS21_NAMES_TO_HEX",
-    "CSS3_HEX_TO_NAMES",
-    "CSS3_NAMES_TO_HEX",
     "name_to_hex",
     "name_to_rgb",
     "name_to_rgb_percent",
