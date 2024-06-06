@@ -144,8 +144,7 @@ of different test tasks. The source distribution of ``webcolors`` includes its
 ``noxfile.py`` file. To run the tests, install nox (``pip install nox``), then
 download and unpack a git checkout or source package of ``webcolors``.
 
-To run the normal test suite against the complete set of supported Python
-versions:
+To run the normal test suite:
 
 .. tab:: macOS/Linux/other Unix
 
@@ -161,10 +160,11 @@ versions:
       py -m pip install nox
       py -m nox
 
-This requires that you have each supported version of Python (for ``webcolors``
-|release|, this is 3.8, 3.9, 3.10, 3.11, and 3.12) available. To test only
-against a specific version of Python, use the ``--python`` flag and pass the
-version to test. For example, to test on Python 3.10:
+This will attempt to test against each supported version of Python (for
+``webcolors`` |release|, this is 3.8, 3.9, 3.10, 3.11, and 3.12), skipping any
+which are missing on your machine. To test only against a specific version of
+Python, use the ``--python`` flag and pass the version to test. For example, to
+test on Python 3.10:
 
 .. tab:: macOS/Linux/other Unix
 
