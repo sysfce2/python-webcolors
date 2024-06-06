@@ -264,3 +264,42 @@ CSS3_HEX_TO_NAMES["#808080"] = "gray"
 CSS3_HEX_TO_NAMES["#d3d3d3"] = "lightgray"
 CSS3_HEX_TO_NAMES["#778899"] = "lightslategray"
 CSS3_HEX_TO_NAMES["#708090"] = "slategray"
+
+
+_names_to_hex = {
+    HTML4: HTML4_NAMES_TO_HEX,
+    CSS2: CSS2_NAMES_TO_HEX,
+    CSS21: CSS21_NAMES_TO_HEX,
+    CSS3: CSS3_NAMES_TO_HEX,
+}
+
+_hex_to_names = {
+    HTML4: HTML4_HEX_TO_NAMES,
+    CSS2: CSS2_HEX_TO_NAMES,
+    CSS21: CSS21_HEX_TO_NAMES,
+    CSS3: CSS3_HEX_TO_NAMES,
+}
+
+
+def _get_name_to_hex_map(spec: str):
+    """
+    Return the name-to-hex mapping for the given specification.
+
+    :raises ValueError: when the given spec is not supported.
+
+    """
+    if spec not in SUPPORTED_SPECIFICATIONS:
+        raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+    return _names_to_hex[spec]
+
+
+def _get_hex_to_name_map(spec: str):
+    """
+    Return the hex-to-name mapping for the given specification.
+
+    :raises ValueError: when the given spec is not supported.
+
+    """
+    if spec not in SUPPORTED_SPECIFICATIONS:
+        raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+    return _hex_to_names[spec]
