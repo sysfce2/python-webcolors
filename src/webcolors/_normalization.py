@@ -44,8 +44,7 @@ def normalize_hex(hex_value: str) -> str:
     :raises ValueError: when the input is not a valid hexadecimal color value.
 
     """
-    match = _HEX_COLOR_RE.match(hex_value)
-    if match is None:
+    if (match := _HEX_COLOR_RE.match(hex_value)) is None:
         raise ValueError(f'"{hex_value}" is not a valid hexadecimal color value.')
     hex_digits = match.group(1)
     if len(hex_digits) == 3:

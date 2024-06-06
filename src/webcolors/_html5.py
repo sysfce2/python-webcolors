@@ -164,8 +164,7 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
     #    return the simple color corresponding to that keyword.
     #
     #    Note: CSS2 System Colors are not recognized.
-    keyword_hex = _CSS3_NAMES_TO_HEX.get(value.lower())
-    if keyword_hex is not None:
+    if keyword_hex := _CSS3_NAMES_TO_HEX.get(value.lower()):
         return html5_parse_simple_color(keyword_hex)
 
     # 6. If input's code point length is four, and the first character in input is
