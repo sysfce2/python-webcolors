@@ -246,17 +246,13 @@ CSS21_HEX_TO_NAMES = _reversedict(CSS21_NAMES_TO_HEX)
 
 CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 
-# CSS3 defines both "gray" and "grey", as well as defining either variant for other
-# related colors like "darkgray"/"darkgrey". For a "forward" lookup from name to hex,
-# this is straightforward, but a "reverse" lookup from hex to name requires picking one
-# spelling.
+# CSS3 defines both "gray" and "grey", as well as defining either spelling variant for
+# other related colors like "darkgray"/"darkgrey", etc. For a "forward" lookup from
+# name to hex, this is straightforward, but a "reverse" lookup from hex to name requires
+# picking one spelling and being consistent about it.
 #
-# The way in which _reversedict() generates the reverse mappings will pick a spelling
-# based on the ordering of dictionary keys, which varies according to the version and
-# implementation of Python in use, and in some Python versions is explicitly not to be
-# relied on for consistency. So here we manually pick a single spelling that will
-# consistently be returned. Since "gray" was the only spelling supported in HTML 4,
-# CSS1, and CSS2, "gray" and its variants are chosen.
+# Since "gray" was the only spelling supported in HTML 4, CSS1, and CSS2, "gray" and its
+# variants are chosen here.
 CSS3_HEX_TO_NAMES["#a9a9a9"] = "darkgray"
 CSS3_HEX_TO_NAMES["#2f4f4f"] = "darkslategray"
 CSS3_HEX_TO_NAMES["#696969"] = "dimgray"
