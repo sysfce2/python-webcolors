@@ -4,8 +4,8 @@
 Installation guide
 ==================
 
-The |release| version of ``webcolors`` is officially tested and supported
-on the following versions of Python:
+Version |release| of ``webcolors`` is officially tested and supported on the
+following versions of Python:
 
 * Python 3.8
 

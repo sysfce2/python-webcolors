@@ -10,8 +10,8 @@ using ``webcolors``.
 What versions of Python are supported?
 --------------------------------------
 
-The |release| version of ``webcolors`` supports and is tested on Python 3.8,
-3.9, 3.10, 3.11, and 3.12.
+Version |release| of ``webcolors`` supports and is tested on Python 3.8, 3.9,
+3.10, 3.11, and 3.12.
 
 
 How closely does this module follow the standards?
