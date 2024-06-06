@@ -52,7 +52,7 @@ class HexConversionTests(unittest.TestCase):
         specification raises ValueError.
 
         """
-        for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
+        for supported_spec in webcolors._definitions._SUPPORTED_SPECIFICATIONS:
             result = webcolors.hex_to_name("#ffffff", spec=supported_spec)
             assert "white" == result
 
@@ -135,7 +135,7 @@ class IntegerRGBConversionTests(unittest.TestCase):
         specification raises ValueError.
 
         """
-        for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
+        for supported_spec in webcolors._definitions._SUPPORTED_SPECIFICATIONS:
             result = webcolors.rgb_to_name((255, 255, 255), spec=supported_spec)
             assert "white" == result
 
@@ -219,7 +219,7 @@ class NameConversionTests(unittest.TestCase):
         specification raises ValueError.
 
         """
-        for supported_spec in webcolors._definitions.SUPPORTED_SPECIFICATIONS:
+        for supported_spec in webcolors._definitions._SUPPORTED_SPECIFICATIONS:
             result = webcolors.name_to_hex("white", spec=supported_spec)
             assert "#ffffff" == result
 

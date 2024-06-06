@@ -17,7 +17,7 @@ included as comments interspersed in the implementation.
 
 import string
 
-from ._definitions import CSS3_NAMES_TO_HEX
+from ._definitions import _CSS3_NAMES_TO_HEX
 from ._types import HTML5SimpleColor, IntTuple
 
 
@@ -164,7 +164,7 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
     #    return the simple color corresponding to that keyword.
     #
     #    Note: CSS2 System Colors are not recognized.
-    keyword_hex = CSS3_NAMES_TO_HEX.get(value.lower())
+    keyword_hex = _CSS3_NAMES_TO_HEX.get(value.lower())
     if keyword_hex is not None:
         return html5_parse_simple_color(keyword_hex)
 

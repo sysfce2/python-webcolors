@@ -17,18 +17,18 @@ def _reversedict(dict_to_reverse: dict) -> dict:
     return {value: key for key, value in dict_to_reverse.items()}
 
 
-HEX_COLOR_RE = re.compile(r"^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$")
+_HEX_COLOR_RE = re.compile(r"^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$")
 
 HTML4 = "html4"
 CSS2 = "css2"
 CSS21 = "css21"
 CSS3 = "css3"
 
-SUPPORTED_SPECIFICATIONS = (HTML4, CSS2, CSS21, CSS3)
+_SUPPORTED_SPECIFICATIONS = (HTML4, CSS2, CSS21, CSS3)
 
-SPECIFICATION_ERROR_TEMPLATE = (
+_SPECIFICATION_ERROR_TEMPLATE = (
     f"{{spec}} is not a supported specification for color name lookups; "
-    f"supported specifications are: {SUPPORTED_SPECIFICATIONS}."
+    f"supported specifications are: {_SUPPORTED_SPECIFICATIONS}."
 )
 
 # Mappings of color names to normalized hexadecimal color values.
@@ -43,7 +43,7 @@ SPECIFICATION_ERROR_TEMPLATE = (
 # The file tests/definitions.py in the source distribution of this module downloads a
 # copy of the HTML 4 standard and parses out the color names to ensure the values below
 # are correct.
-HTML4_NAMES_TO_HEX = {
+_HTML4_NAMES_TO_HEX = {
     "aqua": "#00ffff",
     "black": "#000000",
     "blue": "#0000ff",
@@ -63,10 +63,10 @@ HTML4_NAMES_TO_HEX = {
 }
 
 # CSS2 used the same list as HTML 4.
-CSS2_NAMES_TO_HEX = HTML4_NAMES_TO_HEX
+_CSS2_NAMES_TO_HEX = _HTML4_NAMES_TO_HEX
 
 # CSS2.1 added orange.
-CSS21_NAMES_TO_HEX = {"orange": "#ffa500", **HTML4_NAMES_TO_HEX}
+_CSS21_NAMES_TO_HEX = {"orange": "#ffa500", **_HTML4_NAMES_TO_HEX}
 
 # The CSS3/SVG named colors.
 #
@@ -84,7 +84,7 @@ CSS21_NAMES_TO_HEX = {"orange": "#ffa500", **HTML4_NAMES_TO_HEX}
 # mapping below is to hex values instead. The file tests/definitions.py in the source
 # distribution of this module downloads a copy of the CSS3 color module and parses out
 # the color names to ensure the values below are correct.
-CSS3_NAMES_TO_HEX = {
+_CSS3_NAMES_TO_HEX = {
     "aliceblue": "#f0f8ff",
     "antiquewhite": "#faebd7",
     "aqua": "#00ffff",
@@ -238,13 +238,13 @@ CSS3_NAMES_TO_HEX = {
 # Mappings of normalized hexadecimal color values to color names.
 # --------------------------------------------------------------------------------
 
-HTML4_HEX_TO_NAMES = _reversedict(HTML4_NAMES_TO_HEX)
+_HTML4_HEX_TO_NAMES = _reversedict(_HTML4_NAMES_TO_HEX)
 
-CSS2_HEX_TO_NAMES = HTML4_HEX_TO_NAMES
+_CSS2_HEX_TO_NAMES = _HTML4_HEX_TO_NAMES
 
-CSS21_HEX_TO_NAMES = _reversedict(CSS21_NAMES_TO_HEX)
+_CSS21_HEX_TO_NAMES = _reversedict(_CSS21_NAMES_TO_HEX)
 
-CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
+_CSS3_HEX_TO_NAMES = _reversedict(_CSS3_NAMES_TO_HEX)
 
 # CSS3 defines both "gray" and "grey", as well as defining either spelling variant for
 # other related colors like "darkgray"/"darkgrey", etc. For a "forward" lookup from
@@ -253,27 +253,27 @@ CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 #
 # Since "gray" was the only spelling supported in HTML 4, CSS1, and CSS2, "gray" and its
 # variants are chosen here.
-CSS3_HEX_TO_NAMES["#a9a9a9"] = "darkgray"
-CSS3_HEX_TO_NAMES["#2f4f4f"] = "darkslategray"
-CSS3_HEX_TO_NAMES["#696969"] = "dimgray"
-CSS3_HEX_TO_NAMES["#808080"] = "gray"
-CSS3_HEX_TO_NAMES["#d3d3d3"] = "lightgray"
-CSS3_HEX_TO_NAMES["#778899"] = "lightslategray"
-CSS3_HEX_TO_NAMES["#708090"] = "slategray"
+_CSS3_HEX_TO_NAMES["#a9a9a9"] = "darkgray"
+_CSS3_HEX_TO_NAMES["#2f4f4f"] = "darkslategray"
+_CSS3_HEX_TO_NAMES["#696969"] = "dimgray"
+_CSS3_HEX_TO_NAMES["#808080"] = "gray"
+_CSS3_HEX_TO_NAMES["#d3d3d3"] = "lightgray"
+_CSS3_HEX_TO_NAMES["#778899"] = "lightslategray"
+_CSS3_HEX_TO_NAMES["#708090"] = "slategray"
 
 
 _names_to_hex = {
-    HTML4: HTML4_NAMES_TO_HEX,
-    CSS2: CSS2_NAMES_TO_HEX,
-    CSS21: CSS21_NAMES_TO_HEX,
-    CSS3: CSS3_NAMES_TO_HEX,
+    HTML4: _HTML4_NAMES_TO_HEX,
+    CSS2: _CSS2_NAMES_TO_HEX,
+    CSS21: _CSS21_NAMES_TO_HEX,
+    CSS3: _CSS3_NAMES_TO_HEX,
 }
 
 _hex_to_names = {
-    HTML4: HTML4_HEX_TO_NAMES,
-    CSS2: CSS2_HEX_TO_NAMES,
-    CSS21: CSS21_HEX_TO_NAMES,
-    CSS3: CSS3_HEX_TO_NAMES,
+    HTML4: _HTML4_HEX_TO_NAMES,
+    CSS2: _CSS2_HEX_TO_NAMES,
+    CSS21: _CSS21_HEX_TO_NAMES,
+    CSS3: _CSS3_HEX_TO_NAMES,
 }
 
 
@@ -284,8 +284,8 @@ def _get_name_to_hex_map(spec: str):
     :raises ValueError: when the given spec is not supported.
 
     """
-    if spec not in SUPPORTED_SPECIFICATIONS:
-        raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+    if spec not in _SUPPORTED_SPECIFICATIONS:
+        raise ValueError(_SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
     return _names_to_hex[spec]
 
 
@@ -296,6 +296,6 @@ def _get_hex_to_name_map(spec: str):
     :raises ValueError: when the given spec is not supported.
 
     """
-    if spec not in SUPPORTED_SPECIFICATIONS:
-        raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+    if spec not in _SUPPORTED_SPECIFICATIONS:
+        raise ValueError(_SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
     return _hex_to_names[spec]

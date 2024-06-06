@@ -5,7 +5,7 @@ Normalization utilities for color values.
 
 # SPDX-License-Identifier: BSD-3-Clause
 
-from ._definitions import HEX_COLOR_RE
+from ._definitions import _HEX_COLOR_RE
 from ._types import IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
 
@@ -44,7 +44,7 @@ def normalize_hex(hex_value: str) -> str:
     :raises ValueError: when the input is not a valid hexadecimal color value.
 
     """
-    match = HEX_COLOR_RE.match(hex_value)
+    match = _HEX_COLOR_RE.match(hex_value)
     if match is None:
         raise ValueError(f'"{hex_value}" is not a valid hexadecimal color value.')
     hex_digits = match.group(1)
