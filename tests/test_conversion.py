@@ -411,3 +411,27 @@ class ConversionTests(unittest.TestCase):
                 (webcolors.rgb_percent_to_name, percent_tuple),
             ):
                 assert name == converter(value, spec=webcolors.CSS3)
+
+    def test_names_valid(self):
+        """
+        names() correctly returns the set of names for a given spec.
+
+        """
+        for spec, mapping in (
+            (webcolors.HTML4, webcolors._definitions._HTML4_NAMES_TO_HEX),
+            (webcolors.CSS2, webcolors._definitions._CSS2_NAMES_TO_HEX),
+            (webcolors.CSS21, webcolors._definitions._CSS21_NAMES_TO_HEX),
+            (webcolors.CSS3, webcolors._definitions._CSS3_NAMES_TO_HEX),
+        ):
+            with self.subTest(spec=spec):
+                assert webcolors.names(spec) == list(sorted(mapping.keys()))
+
+    def test_names_invalid(self):
+        """
+        names() raises ValueError when asked for an unsupported spec.
+
+        """
+        for spec in ("CSS0", "HTML12", "random"):
+            with self.subTest(spec=spec):
+                with self.assertRaises(ValueError):
+                    webcolors.names(spec)

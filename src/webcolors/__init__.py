@@ -23,7 +23,7 @@ from ._conversion import (
     rgb_to_name,
     rgb_to_rgb_percent,
 )
-from ._definitions import CSS2, CSS3, CSS21, HTML4
+from ._definitions import CSS2, CSS3, CSS21, HTML4, names
 from ._html5 import (
     html5_parse_legacy_color,
     html5_parse_simple_color,
@@ -36,7 +36,7 @@ from ._normalization import (
 )
 from ._types import HTML5SimpleColor, IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
-__version__ = "24.6.0"
+__version__ = "24.8.0a1"
 
 __all__ = [
     "HTML4",
@@ -49,6 +49,7 @@ __all__ = [
     "hex_to_name",
     "hex_to_rgb",
     "hex_to_rgb_percent",
+    "names",
     "rgb_to_hex",
     "rgb_to_name",
     "rgb_to_rgb_percent",

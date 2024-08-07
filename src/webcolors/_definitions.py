@@ -6,6 +6,7 @@ Definitions of valid formats and values for colors.
 # SPDX-License-Identifier: BSD-3-Clause
 
 import re
+from typing import List
 
 
 def _reversedict(dict_to_reverse: dict) -> dict:
@@ -299,3 +300,43 @@ def _get_hex_to_name_map(spec: str):
     if spec not in _SUPPORTED_SPECIFICATIONS:
         raise ValueError(_SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
     return _hex_to_names[spec]
+
+
+def names(spec: str = CSS3) -> List[str]:
+    """
+    Return the list of valid color names for the given specification.
+
+    The color names will be normalized to all-lowercase, and will be returned in
+    alphabetical order.
+
+    .. note:: **Spelling variants**
+
+       Some values representing named gray colors can map to either of two names in
+       CSS3, because it supports both ``"gray"`` and ``"grey"`` spelling variants for
+       those colors. Functions which produce a name from a color value in other formats
+       all normalize to the ``"gray"`` spelling for consistency with earlier CSS and
+       HTML specifications which only supported ``"gray"``. Here, however, *all* valid
+       names are returned, including -- for CSS3 -- both variant spellings for each of
+       the affected ``"gray"``/``"grey"`` colors.
+
+    Examples:
+
+    .. doctest::
+
+        >>> names(spec=HTML4)
+        ['aqua', 'black', 'blue', 'fuchsia', 'gray', 'green',
+         'lime', 'maroon', 'navy', 'olive', 'purple', 'red',
+         'silver', 'teal', 'white', 'yellow']
+        >>> names(spec="CSS1")
+        Traceback (most recent call last):
+            ...
+        ValueError: "CSS1" is not a supported specification ...
+
+
+    :raises ValueError: when the given spec is not supported.
+
+    """
+    if spec not in _SUPPORTED_SPECIFICATIONS:
+        raise ValueError(_SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+    mapping = _names_to_hex[spec]
+    return list(sorted(mapping.keys()))

@@ -56,6 +56,17 @@ The API stability/deprecation policy for this library is as follows:
 Releases under CalVer
 ---------------------
 
+Version 24.8.0
+~~~~~~~~~~~~~~
+
+*Under development*
+
+* Added the :func:`~webcolors.names` function to allow retrieving lists of
+  color names. The underlying mappings of color names/values still are not
+  supported API; to obtain the color value corresponding to a name, use the
+  appropriate conversion function.
+
+
 Version 24.6.0
 ~~~~~~~~~~~~~~
 

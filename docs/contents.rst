@@ -93,6 +93,12 @@ specifications.
    Represents the HTML 4 specification. Value is ``"html4"``.
 
 
+Informative functions
+---------------------
+
+.. autofunction:: names
+
+
 Normalization functions
 -----------------------
 

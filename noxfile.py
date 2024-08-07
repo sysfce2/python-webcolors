@@ -185,6 +185,29 @@ def docs_spellcheck(session: nox.Session) -> None:
     clean()
 
 
+@nox.session(python=["3.11"], tags=["docs", "tests"])
+def docs_test(session: nox.Session) -> None:
+    """
+    Run the code samples in the documentation with doctest, to ensure they are
+    correct.
+
+    """
+    session.install(".[docs]")
+    session.run(
+        f"python{session.python}",
+        "-Im",
+        "sphinx",
+        "-c",
+        "docs/",
+        "-b",
+        "doctest",
+        "-d",
+        "docs/_build/doctrees/html",
+        "docs/",
+        "docs/_build/html",
+    )
+
+
 # Code formatting checks.
 #
 # These checks do *not* reformat code -- that happens in pre-commit hooks -- but will

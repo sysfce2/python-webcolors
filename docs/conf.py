@@ -5,6 +5,7 @@ https://www.sphinx-doc.org/
 
 """
 
+import doctest
 import sys
 from importlib.metadata import version as get_version
 
@@ -50,6 +51,12 @@ spelling_word_list_filename = "spelling_wordlist.txt"
 
 # Doctest configuration.
 doctest_global_setup = "from webcolors import *"
+doctest_default_flags = (
+    doctest.DONT_ACCEPT_TRUE_FOR_1
+    | doctest.ELLIPSIS
+    | doctest.IGNORE_EXCEPTION_DETAIL
+    | doctest.NORMALIZE_WHITESPACE
+)
 
 # OGP metadata configuration.
 ogp_enable_meta_description = True
