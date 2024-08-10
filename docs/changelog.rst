@@ -59,7 +59,7 @@ Releases under CalVer
 Version 24.8.0
 ~~~~~~~~~~~~~~
 
-*Under development*
+Released August 2024
 
 * Added the :func:`~webcolors.names` function to allow retrieving lists of
   color names. The underlying mappings of color names/values still are not
