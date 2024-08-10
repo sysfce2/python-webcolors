@@ -95,7 +95,7 @@ them to the definitions in ``webcolors``. That consists of:
 Fully verifying correctness of conversions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The `full_colors.py` test file exercises :func:`~webcolors.hex_to_rgb`,
+The ``full_colors.py`` test file exercises :func:`~webcolors.hex_to_rgb`,
 :func:`~webcolors.rgb_to_hex`, :func:`~webcolors.rgb_to_rgb_percent` and
 :func:`~webcolors.rgb_percent_to_rgb` as fully as is practical.
 
@@ -116,7 +116,7 @@ however, is more difficult, and a full test is not provided, for two reasons:
 
 2. The only rigorous definition of the format of a percentage value is in CSS2,
    `which declares a percentage to be
-   <http://www.w3.org/TR/CSS2/syndata.html#percentage-units>`_ "a `<number>`
+   <http://www.w3.org/TR/CSS2/syndata.html#percentage-units>`_ "a ``<number>``
    immediately followed by '%'". `The CSS2 definition of a number
    <http://www.w3.org/TR/CSS2/syndata.html#value-def-number>`_ places no limit
    on the length past the decimal point, and appears to be declaring any real
@@ -128,7 +128,7 @@ however, is more difficult, and a full test is not provided, for two reasons:
 Since precise correctness and completeness are not achievable, ``webcolors``
 instead aims to achieve *consistency* in conversions. Specifically, the
 ``full_colors.py`` test generates all 16,777,216 integer ``rgb()`` triplets,
-and for each such triplet `t` verifies that the following assertion holds:
+and for each such triplet ``t`` verifies that the following assertion holds:
 
 .. code-block:: python
 
