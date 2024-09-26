@@ -208,7 +208,7 @@ def docs_spellcheck(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.12"], tags=["docs", "tests"])
+@nox.session(python=["3.12"], tags=["docs"])
 def docs_test(session: nox.Session) -> None:
     """
     Run the code samples in the documentation with doctest, to ensure they are
