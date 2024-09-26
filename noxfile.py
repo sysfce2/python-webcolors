@@ -106,6 +106,8 @@ def tests_definitions(session: nox.Session) -> None:
     Run the full color definitions test suite (requires an internet connection).
 
     """
+    if IS_CI:
+        session.skip("Release tests do not run in CI.")
     session.install("pytest", "bs4", "html5lib", "requests", ".[tests]")
     session.run(f"python{session.python}", "-I", "tests/definitions.py")
     clean()
@@ -117,6 +119,8 @@ def tests_full_colors(session: nox.Session) -> None:
     Run the full color conversion test suite (slow/CPU-intensive).
 
     """
+    if IS_CI:
+        session.skip("Release tests do not run in CI.")
     session.install(".[tests]")
     session.run(f"python{session.python}", "-I", "tests/full_colors.py")
     clean()
@@ -385,6 +389,8 @@ def package_manifest(session: nox.Session) -> None:
     Check that the set of files in the package matches the set under version control.
 
     """
+    if IS_CI:
+        session.skip("check-manifest already run by earlier CI steps.")
     session.install("check-manifest")
     session.run(f"python{session.python}", "-Im", "check_manifest", "--version")
     session.run(f"python{session.python}", "-Im", "check_manifest", "--verbose")
