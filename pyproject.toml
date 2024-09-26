@@ -55,6 +55,9 @@ target-version = ["py38", "py39", "py310", "py311", "py312"]
 [tool.coverage.report]
 fail_under = 100
 
+[tool.coverage.run]
+parallel = true
+
 [tool.interrogate]
 ignore-init-module = true
 

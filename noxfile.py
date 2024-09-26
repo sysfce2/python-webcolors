@@ -24,6 +24,8 @@ nox.options.reuse_existing_virtualenvs = True
 
 PACKAGE_NAME = "webcolors"
 
+IS_CI = bool(os.getenv("CI", False))
+
 NOXFILE_PATH = pathlib.Path(__file__).parents[0]
 ARTIFACT_PATHS = (
     NOXFILE_PATH / "src" / f"{PACKAGE_NAME}.egg-info",
@@ -41,6 +43,10 @@ def clean(paths: typing.Iterable[os.PathLike] = ARTIFACT_PATHS) -> None:
     Clean up after a test run.
 
     """
+    # This cleanup is only useful for the working directory of a local checkout; in CI
+    # we don't need it because CI environments are ephemeral anyway.
+    if IS_CI:
+        return
     [
         shutil.rmtree(path) if path.is_dir() else path.unlink()
         for path in paths
@@ -55,7 +61,7 @@ def clean(paths: typing.Iterable[os.PathLike] = ARTIFACT_PATHS) -> None:
 @nox.session(python=["3.8", "3.9", "3.10", "3.11", "3.12"], tags=["tests"])
 def tests_with_coverage(session: nox.Session) -> None:
     """
-    Run the package's unit tests, with coverage report.
+    Run the package's unit tests, with coverage instrumentation.
 
     """
     session.install(".[tests]")
@@ -71,14 +77,27 @@ def tests_with_coverage(session: nox.Session) -> None:
         "unittest",
         "discover",
     )
-    session.run(
-        f"python{session.python}",
-        "-Im",
-        "coverage",
-        "report",
-        "--show-missing",
-    )
     clean()
+
+
+@nox.session(python=["3.12"], tags=["tests"])
+def coverage_report(session: nox.Session) -> None:
+    """
+    Combine coverage from the various test runs and output the report.
+
+    """
+    # In CI this job does not run because we substitute one that integrates with the CI
+    # system.
+    if IS_CI:
+        session.skip(
+            "Running in CI -- skipping nox coverage job in favor of CI coverage job"
+        )
+    session.install("coverage[toml]")
+    session.run(f"python{session.python}", "-Im", "coverage", "combine")
+    session.run(
+        f"python{session.python}", "-Im", "coverage", "report", "--show-missing"
+    )
+    session.run(f"python{session.python}", "-Im", "coverage", "erase")
 
 
 @nox.session(python=["3.12"], tags=["tests", "release"])
@@ -185,7 +204,7 @@ def docs_spellcheck(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.11"], tags=["docs", "tests"])
+@nox.session(python=["3.12"], tags=["docs", "tests"])
 def docs_test(session: nox.Session) -> None:
     """
     Run the code samples in the documentation with doctest, to ensure they are
