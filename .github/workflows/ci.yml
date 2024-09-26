@@ -77,16 +77,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - uses: hynek/setup-cached-uv@v2
-      - run: uv pip install --system --upgrade coverage[toml]
       - uses: actions/download-artifact@v4
         with:
           pattern: coverage-data-*
           merge-multiple: true
 
-      - name: Combine coverage & fail if it's <100%.
+      - name: Combine coverage & fail under 100%
         run: |
-          uv tool install 'coverage[toml]'
+          python -Im pip install --upgrade "coverage[toml]"
 
           coverage combine
           coverage html --skip-covered --skip-empty
