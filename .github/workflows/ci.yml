@@ -117,7 +117,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Set up test runner
-      - run: |
+        run: |
           python -VV
           python -Im site
           python -Im pip install --upgrade nox
@@ -141,7 +141,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Set up test runner
-      - run: |
+        run: |
           python -VV
           python -Im site
           python -Im pip install --upgrade nox
@@ -167,7 +167,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Set up test runner
-      - run: |
+        run: |
           python -VV
           python -Im site
           python -Im pip install --upgrade nox
