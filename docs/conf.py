@@ -20,10 +20,10 @@ extensions = [
     "sphinx_inline_tabs",
 ]
 templates_path = ["_templates"]
-source_suffix = ".rst"
+source_suffix = {".rst": "restructuredtext"}
 master_doc = "index"
 project = "webcolors"
-copyright = "James Bennett, and contributors"
+copyright = "James Bennett and contributors"
 version = get_version("webcolors")
 release = version
 exclude_trees = ["_build"]

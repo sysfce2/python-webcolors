@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [project]
 authors = [
-  {name = "James Bennett", email = "james@b-list.org"}
+  {name = "James Bennett"}
 ]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
@@ -14,43 +14,33 @@ classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Utilities",
 ]
 name = "webcolors"
 description = "A library for working with the color formats defined by HTML and CSS."
-dynamic = ["version"]
 keywords = ["color", "css", "html", "web"]
 license = {text = "BSD-3-Clause"}
 readme = "README.rst"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
+version = "24.11.0a1"
 
 [project.urls]
-documentation = "https://webcolors.readthedocs.io"
-homepage = "https://github.com/ubernostrum/webcolors"
+"Documentation" = "https://webcolors.readthedocs.io"
+"Source Code" = "https://github.com/ubernostrum/webcolors"
 
-[project.optional-dependencies]
-docs = [
-  "furo",
-  "sphinx",
-  "sphinx-copybutton",
-  "sphinx-inline-tabs",
-  "sphinx-notfound-page",
-  "sphinxext-opengraph",
-]
-tests = [
-  "coverage[toml]",
-]
+[dependency-groups]
+tests = ["nox"]
 
 [tool.bandit]
 skips = ["B101"]
 
 [tool.black]
-target-version = ["py38", "py39", "py310", "py311", "py312"]
+target-version = ["py39", "py310", "py311", "py312", "py313"]
 
 [tool.coverage.paths]
 source = ["src", ".nox/tests_with_coverage*/**/site-packages"]
@@ -64,10 +54,33 @@ parallel = true
 source = ["webcolors"]
 
 [tool.interrogate]
+fail-under = 100
+ignore-init-method = true
 ignore-init-module = true
 
 [tool.isort]
 profile = "black"
 
-[tool.setuptools.dynamic]
-version = {attr = "webcolors.__version__"}
+[tool.pdm]
+distribution = true
+
+[tool.pdm.build]
+source-includes = [
+    ".editorconfig",
+    ".flake8",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yaml",
+    "AUTHORS",
+    "CONTRIBUTING.rst",
+    "docs/",
+    "noxfile.py",
+    "pdm.lock",
+    "runtests.py",
+    "tests/",
+]
+
+[tool.pylint]
+disable = [
+  "duplicate-code",
+  "protected-access",
+]

@@ -56,6 +56,13 @@ The API stability/deprecation policy for this library is as follows:
 Releases under CalVer
 ---------------------
 
+Version 24.11.0
+~~~~~~~~~~~~~~~
+
+*Under development*
+
+* Supported Python versions are now 3.9, 3.10, 3.11, 3.12, and 3.13.
+
 Version 24.8.0
 ~~~~~~~~~~~~~~
 
@@ -72,7 +79,7 @@ Version 24.6.0
 
 Released June 2024
 
-* Supported Python versions are now 3.8, 3.9, 3.10, and 3.11.
+* Supported Python versions are now 3.8, 3.9, 3.10, and 3.12.
 
 * Running the unit tests no longer uses a third-party test runner; the
   standard-library ``unittest`` module's runner is used instead.
