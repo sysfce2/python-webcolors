@@ -56,12 +56,24 @@ The API stability/deprecation policy for this library is as follows:
 Releases under CalVer
 ---------------------
 
+Version 24.11.1
+~~~~~~~~~~~~~~~
+
+Released November 2024
+
+* Correct an error with specifying the version in the 24.11.0 package. The
+  version number of the package was accidentally defined in two places, and
+  they were out of sync. The extra definition has been removed. The 24.11.0
+  package has been yanked from PyPI to prevent problems.
+
+
 Version 24.11.0
 ~~~~~~~~~~~~~~~
 
 Released November 2024
 
 * Supported Python versions are now 3.9, 3.10, 3.11, 3.12, and 3.13.
+
 
 Version 24.8.0
 ~~~~~~~~~~~~~~
